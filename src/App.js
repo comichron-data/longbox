@@ -6,7 +6,7 @@ import Page from './page/Page'
 class App extends Component {
   render() {
     return (
-      <Page imageHeight="200vh"/>
+      <Page imageHeight=""/>
     );
   }
 }
