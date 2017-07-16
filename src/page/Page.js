@@ -5,6 +5,8 @@ import Spinner from '../spinner/Spinner';
 
 class Page extends Component {
   render() {
+    const hideIfProp = prop => element => prop ? null : element;
+    const whenImagePropIsLoadedHide = hideIfProp(this.props.imageUrl);
     const style = {
       "background-image": `url("${this.props.imageUrl}")`,
       "height": this.props.imageHeight
@@ -12,10 +14,7 @@ class Page extends Component {
 
     return (
       <div className="lb-c-page" style={ style }>
-        <Spinner
-          spinnerText="loading"
-          
-        />
+        {whenImagePropIsLoadedHide(<Spinner spinnerText="Drawing"/>)}
       </div>
     );
   }
