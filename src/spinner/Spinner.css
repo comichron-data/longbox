@@ -1,34 +1,42 @@
 .lb-c-spinner {
-  color: rgba(255, 255, 255, .4);
-  height: 15em;
-  width: 10em;
+  color: rgba(255, 255, 255, .2);
+  height: 6em;
+  width: 4em;
   border-width: 1px;
   border-style: solid;
   border-color: currentColor;
-  border-radius: .1em;
+  padding: .1em;
+}
+
+.lb-c-spinner::after {
+  display: block;
+  content: attr(data-spinner-text);
+  margin-top: .9em;
+  font-size: 65%;
+  text-align: center;
+  text-transform: uppercase;
 }
 
 .lb-c-spinner__block {
   display: inline-block;
   border: 1px solid currentColor;
-  border-radius: .1em;
-  margin: .4em .4em 0;
-  height: 4.20em;
+  margin: .2em .2em 0;
+  height: 1.45em;
 }
 .lb-c-spinner__block--25 {
-    width: calc(25% - .8em);
+    width: calc(25% - .4em);
 }
 .lb-c-spinner__block--50 {
-    width: calc(50% - .8em);
+    width: calc(50% - .4em);
 }
 .lb-c-spinner__block--100 {
-    width: calc(100% - .8em);
+    width: calc(100% - .4em);
 }
 .lb-c-spinner__block--animate {
   animation-iteration-count: infinite;
   animation-direction: alternate;
   animation-name: opacity;
-  animation-duration: .8s;
+  animation-duration: 1.2s;
 }
 
 .lb-c-spinner__block--animate
