@@ -1,21 +1,19 @@
 .lb-c-spinner {
-  color: #cccccc;
+  color: rgba(255, 255, 255, .4);
   height: 15em;
   width: 10em;
   border-width: 1px;
   border-style: solid;
   border-color: currentColor;
-  border-radius: .2em;
+  border-radius: .1em;
 }
 
 .lb-c-spinner__block {
   display: inline-block;
   border: 1px solid currentColor;
-  border-radius: .2em;
+  border-radius: .1em;
   margin: .4em .4em 0;
   height: 4.20em;
-  animation-iteration-count: infinite;
-  animation-direction: alternate;
 }
 .lb-c-spinner__block--25 {
     width: calc(25% - .8em);
@@ -27,6 +25,8 @@
     width: calc(100% - .8em);
 }
 .lb-c-spinner__block--animate {
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
   animation-name: opacity;
   animation-duration: .8s;
 }
