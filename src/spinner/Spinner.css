@@ -1,11 +1,12 @@
 .lb-c-spinner {
-  color: rgba(255, 255, 255, .5);
+  color: white;
   height: 6em;
   width: 4em;
   border-width: 1px;
   border-style: solid;
   border-color: currentColor;
   padding: .1em;
+  border-radius: 2px;
   background-color: black;
 }
 

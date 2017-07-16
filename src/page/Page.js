@@ -13,8 +13,8 @@ class Page extends Component {
     };
 
     return (
-      <div className="lb-c-page" style={ style }>
-        {whenImagePropIsLoadedHide(<Spinner spinnerText="Drawing"/>)}
+      <div className="lb-c-page" style={style}>
+        {whenImagePropIsLoadedHide(<Spinner spinnerText="Loading" color="purple"/>)}
       </div>
     );
   }
