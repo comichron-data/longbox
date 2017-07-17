@@ -10,6 +10,26 @@ class Carousel extends Component {
       slideCount: 4,
       currentSlideIndex: 0
     };
+
+    // pre-bind event handlers
+    this.handleForwardClick = this.handleForwardClick.bind(this);
+    this.handleBackClick = this.handleBackClick.bind(this);
+  }
+
+  handleForwardClick() {
+    this.goToPage(this.state.currentSlideIndex + 1);
+  }
+
+  handleBackClick() {
+    this.goToPage(this.state.currentSlideIndex - 1);
+  }
+
+  goToPage(pageNumber) {
+    if (pageNumber >= 0 && pageNumber < this.state.slideCount) {
+      this.setState({
+        currentSlideIndex: pageNumber
+      });
+    }
   }
 
   render() {
@@ -20,8 +40,8 @@ class Carousel extends Component {
 
     return (
       <div className="lb-c-carousel">
-        <button className="lb-c-carousel__nav-backward" onClick="">B</button>
-        <button className="lb-c-carousel__nav-forward" onClick="">F</button>
+        <button className="lb-c-carousel__nav-backward" onClick={this.handleBackClick}>B</button>
+        <button className="lb-c-carousel__nav-forward" onClick={this.handleForwardClick}>F</button>
         <div className="lb-c-carousel__slide" style={styles}>
           {/* map starts here */}
           <div className="lb-c-carousel__item">
