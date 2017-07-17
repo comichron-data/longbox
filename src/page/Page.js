@@ -8,8 +8,8 @@ class Page extends Component {
     const hideIfProp = prop => element => prop ? null : element;
     const whenImagePropIsLoadedHide = hideIfProp(this.props.imageUrl);
     const style = {
-      "background-image": `url("${this.props.imageUrl}")`,
-      "height": this.props.imageHeight
+      backgroundImage: `url("${this.props.imageUrl}")`,
+      height: `${this.props.imageHeight}`
     };
 
     return (

@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import './App.css';
 
-import Page from './page/Page'
+import Carousel from './carousel/Carousel'
 
 class App extends Component {
   render() {
     return (
-      <Page imageHeight="" imageUrl=""/>
+      <Carousel/>
     );
   }
 }

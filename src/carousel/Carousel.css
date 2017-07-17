@@ -1,0 +1,18 @@
+.lb-c-carousel {
+  display: block;
+  background-color: black;
+  width: 100vw;
+  overflow-x: hidden;
+  position: relative;
+  height: 100vh;
+}
+
+.lb-c-carousel__slide {
+  position: absolute;
+  transition: left .5s ease-out;
+}
+
+.lb-c-carousel__item {
+  display: inline-block;
+  width: 100vw;
+}
