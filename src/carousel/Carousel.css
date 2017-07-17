@@ -9,7 +9,7 @@
 
 .lb-c-carousel__slide {
   position: absolute;
-  transition: left .5s ease-out;
+  transition: transform .5s ease-out;
 }
 
 .lb-c-carousel__item {

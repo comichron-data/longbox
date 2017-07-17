@@ -4,13 +4,24 @@ import './Carousel.css';
 import Page from '../page/Page';
 
 class Carousel extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      slideCount: 4,
+      currentSlideIndex: 0
+    };
+  }
+
   render() {
     const styles = {
       width: '400vw', // page count * 100vw
-      left: '-200vw' // (page number - 1) * 100vw
+      transform: `translateX(-${this.state.currentSlideIndex * 100}vw)` // {-(page number index) * 100vw}
     }
+
     return (
       <div className="lb-c-carousel">
+        <button className="lb-c-carousel__nav-backward" onClick="">B</button>
+        <button className="lb-c-carousel__nav-forward" onClick="">F</button>
         <div className="lb-c-carousel__slide" style={styles}>
           {/* map starts here */}
           <div className="lb-c-carousel__item">
