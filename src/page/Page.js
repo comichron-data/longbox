@@ -57,10 +57,10 @@ class Page extends Component {
 
   styleObject() {
     const style = {
-      height: `${this.props.imageHeight}`
     };
 
     if (this.state.loaded) {
+      style.height = `${this.props.imageHeight}`;
       style.backgroundImage = `url("${this.props.imageUrl}")`;
     }
 
