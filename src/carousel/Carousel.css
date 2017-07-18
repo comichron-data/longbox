@@ -1,6 +1,6 @@
-* {
+/** {
   outline: 1px solid purple;
-}
+}*/
 .lb-c-carousel {
   display: block;
   background-color: black;
@@ -11,14 +11,16 @@
 }
 
 .lb-c-carousel__slide {
-  position: absolute;
   transition: transform .5s ease-out;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 
 .lb-c-carousel__item {
-  display: inline-block;
   width: 100vw;
 }
+
 .lb-c-carousel__button {
   pointer-events: all;
   display: inline-block;

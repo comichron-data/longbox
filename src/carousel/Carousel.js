@@ -63,7 +63,7 @@ class Carousel extends Component {
         this.setState({
           pages
         });
-      }, 1000)
+      }, 100000)
 
       this.setState({
         currentSlideIndex: pageNumber

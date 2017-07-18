@@ -1,18 +1,9 @@
-/** {
-  outline: 1px solid red;
-}*/
-
-/*
- 1. clearning the tiny margin at the bottom of the image.
-*/
-
 .lb-c-page {
   background-position: top center;
   background-size: contain;
   background-repeat: no-repeat;
-  width: 100%;
-  min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
+  min-height: 100vh;
 }
