@@ -40,8 +40,6 @@ class Carousel extends Component {
 
     return (
       <div className="lb-c-carousel">
-        <button className="lb-c-carousel__nav-backward" onClick={this.handleBackClick}>B</button>
-        <button className="lb-c-carousel__nav-forward" onClick={this.handleForwardClick}>F</button>
         <div className="lb-c-carousel__slide" style={styles}>
           {/* map starts here */}
           <div className="lb-c-carousel__item">
@@ -57,6 +55,10 @@ class Carousel extends Component {
           <div className="lb-c-carousel__item">
             <Page imageUrl="http://www.harkavagrant.com/history/wutheringsixsm.png" imageHeight="1481px" />
           </div>
+        </div>
+        <div className="lb-c-carousel__navigation">
+          <button className="lb-c-carousel__button lb-c-carousel__nav-backward" onClick={this.handleBackClick}>B</button>
+          <button className="lb-c-carousel__button lb-c-carousel__nav-forward" onClick={this.handleForwardClick}>F</button>
         </div>
       </div>
     );

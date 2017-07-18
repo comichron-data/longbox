@@ -1,3 +1,6 @@
+* {
+  outline: 1px solid purple;
+}
 .lb-c-carousel {
   display: block;
   background-color: black;
@@ -14,5 +17,21 @@
 
 .lb-c-carousel__item {
   display: inline-block;
+  width: 100vw;
+}
+.lb-c-carousel__button {
+  pointer-events: all;
+  display: inline-block;
+  width: 10vw;
+}
+
+.lb-c-carousel__navigation {
+  position: fixed;
+  display: flex;
+  justify-content: space-between;
+  pointer-events: none;
+  top: 0;
+  left: 0;
+  height: 100vh;
   width: 100vw;
 }
