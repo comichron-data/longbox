@@ -7,3 +7,7 @@
   align-items: center;
   min-height: 100vh;
 }
+
+.lb-c-page__image {
+  max-width: 100%;
+}

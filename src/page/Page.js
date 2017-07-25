@@ -49,8 +49,8 @@ class Page extends Component {
     const style = this.styleObject();
 
     return (
-      <div className="lb-c-page" style={style}>
-        {whenImageIsLoadedHide(<Spinner spinnerText="Loading" color="white"/>)}
+      <div className="lb-c-page">
+        <img className="lb-c-page__image" style={style} src={this.props.imageUrl}/>
       </div>
     );
   }
@@ -60,8 +60,8 @@ class Page extends Component {
     };
 
     if (this.state.loaded) {
-      style.height = `${this.props.imageHeight}`;
-      style.backgroundImage = `url("${this.props.imageUrl}")`;
+      // style.height = `${this.props.imageHeight}`;
+      // style.backgroundImage = `url("${this.props.imageUrl}")`;
     }
 
     return style;
@@ -69,3 +69,6 @@ class Page extends Component {
 }
 
 export default Page;
+
+// {whenImageIsLoadedHide(<Spinner spinnerText="Loading" color="white"/>)}
+// </img>

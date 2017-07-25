@@ -4,14 +4,12 @@
 .lb-c-carousel {
   display: block;
   background-color: black;
-  width: 100vw;
   overflow-x: hidden;
   position: relative;
-  height: 100vh;
 }
 
 .lb-c-carousel__slide {
-  transition: transform .5s ease-out;
+  transition: transform .25s cubic-bezier(0.7, 0.19, 0.44, 0.96);
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -24,7 +22,10 @@
 .lb-c-carousel__button {
   pointer-events: all;
   display: inline-block;
-  width: 10vw;
+  width: 50%;
+  background-color: transparent;
+  border: 0;
+  outline: none;
 }
 
 .lb-c-carousel__navigation {
@@ -34,6 +35,23 @@
   pointer-events: none;
   top: 0;
   left: 0;
-  height: 100vh;
-  width: 100vw;
+  height: 100%;
+  width: 100%;
+}
+
+.lb-c-carousel__counter {
+  position: absolute;
+  width: 100%;
+  text-align: center;
+  bottom: 1em;
+  pointer-events: none;
+}
+
+.lb-c-carousel__counter-text {
+  display: inline-block;
+  padding: .5em 1em;
+  border-radius: 1000px;
+  font-weight: bold;
+  color: white;
+  background-color: rgba(0, 0, 0, .8);
 }

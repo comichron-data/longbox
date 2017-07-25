@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
 import './Carousel.css';
 
 import Page from '../page/Page';
@@ -39,10 +40,12 @@ class Carousel extends Component {
   }
 
   handleForwardClick() {
+    this.scrollToTop();
     this.goToPage(this.state.currentSlideIndex + 1);
   }
 
   handleBackClick() {
+    this.scrollToTop();
     this.goToPage(this.state.currentSlideIndex - 1);
   }
 
@@ -71,9 +74,13 @@ class Carousel extends Component {
     }
   }
 
+  scrollToTop() {
+    ReactDOM.findDOMNode(this).scrollIntoView();
+  }
+
   render() {
     const styles = {
-      width: '400vw', // page count * 100vw
+      width: `${(this.state.pages.length * 100)}vw`, // page count * 100vw
       transform: `translateX(-${this.state.currentSlideIndex * 100}vw)` // {-(page number index) * 100vw}
     }
 
@@ -84,7 +91,6 @@ class Carousel extends Component {
             <Page
               imageUrl={page.imageUrl}
               readyToLoad={page.readyToLoad}
-              imageHeight="1481px"
             />
           </div>
         );
@@ -98,6 +104,7 @@ class Carousel extends Component {
         <div className="lb-c-carousel__navigation">
           <button className="lb-c-carousel__button lb-c-carousel__nav-backward" onClick={this.handleBackClick}>B</button>
           <button className="lb-c-carousel__button lb-c-carousel__nav-forward" onClick={this.handleForwardClick}>F</button>
+          <div className="lb-js-carousel__ui lb-c-carousel__counter"><div className="lb-c-carousel__counter-text">{this.state.currentSlideIndex + 1} of {this.state.pages.length}</div></div>
         </div>
       </div>
     );
