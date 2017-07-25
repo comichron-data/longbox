@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import './Spinner.css';
 
 class Spinner extends Component {
@@ -19,4 +20,8 @@ class Spinner extends Component {
   }
 }
 
+
+Spinner.propTypes = {
+  color: PropTypes.string
+}
 export default Spinner;

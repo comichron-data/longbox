@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+// import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
 import './Carousel.css';
 
@@ -66,7 +67,7 @@ class Carousel extends Component {
         this.setState({
           pages
         });
-      }, 100000)
+      }, 1000)
 
       this.setState({
         currentSlideIndex: pageNumber

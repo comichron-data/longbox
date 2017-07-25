@@ -1,29 +1,29 @@
 .lb-c-spinner {
+  background-color: black;
+  border-color: currentColor;
+  border-radius: 2px;
+  border-style: solid;
+  border-width: 1px;
   color: white;
   height: 6em;
-  width: 4em;
-  border-width: 1px;
-  border-style: solid;
-  border-color: currentColor;
   padding: .1em;
-  border-radius: 2px;
-  background-color: black;
+  width: 4em;
 }
 
 .lb-c-spinner::after {
-  display: block;
   content: attr(data-spinner-text);
-  margin-top: .9em;
+  display: block;
   font-size: 65%;
+  margin-top: .9em;
   text-align: center;
   text-transform: uppercase;
 }
 
 .lb-c-spinner__block {
-  display: inline-block;
   border: 1px solid currentColor;
-  margin: .2em .2em 0;
+  display: inline-block;
   height: 1.45em;
+  margin: .2em .2em 0;
 }
 .lb-c-spinner__block--25 {
     width: calc(25% - .4em);
@@ -35,10 +35,10 @@
     width: calc(100% - .4em);
 }
 .lb-c-spinner__block--animate {
-  animation-iteration-count: infinite;
   animation-direction: alternate;
-  animation-name: opacity;
   animation-duration: 1.2s;
+  animation-iteration-count: infinite;
+  animation-name: opacity;
 }
 
 .lb-c-spinner__block--animate

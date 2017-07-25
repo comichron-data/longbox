@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import './Page.css';
 
-import Spinner from '../spinner/Spinner';
+// import Spinner from '../spinner/Spinner';
 
 class Page extends Component {
   constructor(props) {
@@ -44,31 +45,17 @@ class Page extends Component {
   }
 
   render() {
-    const hideIfProp = prop => element => prop ? null : element;
-    const whenImageIsLoadedHide = hideIfProp(this.state.loaded);
-    const style = this.styleObject();
-
     return (
       <div className="lb-c-page">
-        <img className="lb-c-page__image" style={style} src={this.props.imageUrl}/>
+        <img alt={this.props.imageUrl} className="lb-c-page__image" src={this.props.imageUrl}/>
       </div>
     );
   }
+}
 
-  styleObject() {
-    const style = {
-    };
-
-    if (this.state.loaded) {
-      // style.height = `${this.props.imageHeight}`;
-      // style.backgroundImage = `url("${this.props.imageUrl}")`;
-    }
-
-    return style;
-  }
+Page.propTypes = {
+  imageUrl: PropTypes.string.isRequired,
+  readyToLoad: PropTypes.bool
 }
 
 export default Page;
-
-// {whenImageIsLoadedHide(<Spinner spinnerText="Loading" color="white"/>)}
-// </img>
