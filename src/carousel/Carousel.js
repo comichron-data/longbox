@@ -103,8 +103,8 @@ class Carousel extends Component {
           {pages}
         </div>
         <div className="lb-c-carousel__navigation">
-          <button className="lb-c-carousel__button lb-c-carousel__nav-backward" onClick={this.handleBackClick}>B</button>
-          <button className="lb-c-carousel__button lb-c-carousel__nav-forward" onClick={this.handleForwardClick}>F</button>
+          <button className="lb-c-carousel__button lb-c-carousel__nav-backward" onClick={this.handleBackClick}></button>
+          <button className="lb-c-carousel__button lb-c-carousel__nav-forward" onClick={this.handleForwardClick}></button>
           <div className="lb-js-carousel__ui lb-c-carousel__counter"><div className="lb-c-carousel__counter-text">{this.state.currentSlideIndex + 1} of {this.state.pages.length}</div></div>
         </div>
       </div>

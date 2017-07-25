@@ -50,9 +50,8 @@
 
 .lb-c-carousel__counter-text {
   background-color: rgba(0, 0, 0, .8);
-  border-radius: 1000px;
+  border-radius: .5em;
   color: currentColor;
   display: inline-block;
-  font-weight: bold;
   padding: .5em 1em;
 }
