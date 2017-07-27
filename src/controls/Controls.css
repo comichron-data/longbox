@@ -1,0 +1,16 @@
+.lb-c-controls {
+  background-color: rgba(0, 0, 0, .8);
+  border-radius: .5em;
+  color: currentColor;
+  display: inline-block;
+  padding: .5em 1em;
+}
+
+.lb-c-controls__button {
+  background-color: transparent;
+  border: 0;
+}
+
+.lb-c-controls__button + .lb-c-controls__button {
+  margin-left: 1em;
+}

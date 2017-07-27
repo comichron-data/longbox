@@ -1,6 +1,3 @@
-/** {
-  outline: 1px solid purple;
-}*/
 .lb-c-carousel {
   background-color: black;
   display: block;
@@ -19,39 +16,32 @@
   width: 100vw;
 }
 
+.lb-c-carousel__ui {
+  position: fixed;
+  height: 100%;
+  left: 0;
+  top: 0;
+  width: 100%;
+}
+
 .lb-c-carousel__button {
   background-color: transparent;
   border: 0;
   display: inline-block;
   outline: none;
-  pointer-events: all;
   width: 50%;
-}
-
-.lb-c-carousel__navigation {
-  display: flex;
   height: 100%;
-  justify-content: space-between;
-  left: 0;
-  pointer-events: none;
-  position: fixed;
-  top: 0;
-  width: 100%;
 }
 
-.lb-c-carousel__counter {
-  bottom: 1em;
+.lb-c-carousel__toolbar {
   color: white;
-  pointer-events: none;
   position: absolute;
   text-align: center;
   width: 100%;
 }
-
-.lb-c-carousel__counter-text {
-  background-color: rgba(0, 0, 0, .8);
-  border-radius: .5em;
-  color: currentColor;
-  display: inline-block;
-  padding: .5em 1em;
+.lb-c-carousel__toolbar--counter {
+  bottom: 1em;
+}
+.lb-c-carousel__toolbar--controls {
+  top: 1em;
 }

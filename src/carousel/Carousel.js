@@ -4,6 +4,8 @@ import ReactDOM from 'react-dom';
 import './Carousel.css';
 
 import Page from '../page/Page';
+import Counter from '../counter/Counter';
+import Controls from '../controls/Controls';
 
 class Carousel extends Component {
   constructor(props) {
@@ -99,14 +101,27 @@ class Carousel extends Component {
 
     return (
       <div className="lb-c-carousel">
+
         <div className="lb-c-carousel__slide" style={styles}>
           {pages}
         </div>
-        <div className="lb-c-carousel__navigation">
+
+        <div className="lb-c-carousel__ui">
+
           <button className="lb-c-carousel__button lb-c-carousel__nav-backward" onClick={this.handleBackClick}></button>
           <button className="lb-c-carousel__button lb-c-carousel__nav-forward" onClick={this.handleForwardClick}></button>
-          <div className="lb-js-carousel__ui lb-c-carousel__counter"><div className="lb-c-carousel__counter-text">{this.state.currentSlideIndex + 1} of {this.state.pages.length}</div></div>
+
+          <div className="lb-c-carousel__toolbar lb-c-carousel__toolbar--counter">
+              <Counter current={this.state.currentSlideIndex + 1} total={this.state.pages.length}/>
+          </div>
+
+          <div className="lb-js-carousel__ui lb-c-carousel__toolbar lb-c-carousel__toolbar--controls">
+            <Controls />
+          </div>
+
         </div>
+
+
       </div>
     );
   }
