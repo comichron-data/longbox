@@ -5,13 +5,13 @@ import './Counter.css';
 class Counter extends Component {
   render() {
     return (
-      <div className="lb-c-counter">{this.props.current} of {this.props.total}</div>
+      <div className="lb-c-counter">{this.props.label}</div>
     );
   }
 }
 
 Counter.propTypes = {
-  current: PropTypes.string.isRequired,
-  total: PropTypes.string.isRequired
+  label: PropTypes.string.isRequired
 }
+
 export default Counter;

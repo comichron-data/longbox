@@ -10,30 +10,17 @@ import Controls from '../controls/Controls';
 class Carousel extends Component {
   constructor(props) {
     super(props);
+
+    const pages = props.pages
+      .map(page => {
+        return Object.assign({}, page, {
+          readyToLoad: page.preload
+        })
+      });
+
     this.state = {
-      pages: [
-        {
-          imageUrl: 'http://www.harkavagrant.com/history/wutheringsixsm.png',
-          readyToLoad: true,
-          loaded: false
-        },
-        {
-          imageUrl: 'http://www.harkavagrant.com/history/wutheringsixsm.png',
-          readyToLoad: false,
-          loaded: false
-        },
-        {
-          imageUrl: 'http://www.harkavagrant.com/history/wutheringsixsm.png',
-          readyToLoad: false,
-          loaded: false
-        },
-        {
-          imageUrl: 'http://www.harkavagrant.com/history/wutheringsixsm.png',
-          readyToLoad: false,
-          loaded: false
-        }
-      ],
-      slideCount: 4,
+      pages,
+      slideCount: pages.length,
       currentSlideIndex: 0
     };
 
@@ -54,24 +41,17 @@ class Carousel extends Component {
 
   goToPage(pageNumber) {
     if (pageNumber >= 0 && pageNumber < this.state.slideCount) {
-
-      // fake delay just to see it lazy load in
-      setTimeout(() => {
-        const pages = this.state.pages
-          .map((page, index) => {
-            if (index === pageNumber) {
-              return Object.assign({}, page, {readyToLoad: true});
-            } else {
-              return page;
-            }
-          });
-
-        this.setState({
-          pages
+      const pages = this.state.pages
+        .map((page, index) => {
+          if (index === pageNumber) {
+            return Object.assign({}, page, {readyToLoad: true});
+          } else {
+            return page;
+          }
         });
-      }, 1000)
 
       this.setState({
+        pages,
         currentSlideIndex: pageNumber
       });
     }
@@ -87,23 +67,11 @@ class Carousel extends Component {
       transform: `translateX(-${this.state.currentSlideIndex * 100}vw)` // {-(page number index) * 100vw}
     }
 
-    const pages = this.state.pages
-      .map((page, index) => {
-        return (
-          <div key={index} className="lb-c-carousel__item">
-            <Page
-              imageUrl={page.imageUrl}
-              readyToLoad={page.readyToLoad}
-            />
-          </div>
-        );
-      });
-
     return (
       <div className="lb-c-carousel">
 
         <div className="lb-c-carousel__slide" style={styles}>
-          {pages}
+          {this.renderPages()}
         </div>
 
         <div className="lb-c-carousel__ui">
@@ -112,7 +80,7 @@ class Carousel extends Component {
           <button className="lb-c-carousel__button lb-c-carousel__nav-forward" onClick={this.handleForwardClick}></button>
 
           <div className="lb-c-carousel__toolbar lb-c-carousel__toolbar--counter">
-              <Counter current={this.state.currentSlideIndex + 1} total={this.state.pages.length}/>
+            {this.renderCounter()}
           </div>
 
           <div className="lb-js-carousel__ui lb-c-carousel__toolbar lb-c-carousel__toolbar--controls">
@@ -121,9 +89,31 @@ class Carousel extends Component {
 
         </div>
 
-
       </div>
     );
+  }
+
+  renderPages() {
+    return this.state.pages
+      .map(page => {
+        return (
+          <div key={page.id} className="lb-c-carousel__item">
+            <Page
+              imageUrl={page.url}
+              readyToLoad={page.readyToLoad}
+            />
+          </div>
+        );
+      });
+  }
+
+  getCurrentPageProps() {
+    return this.state.pages[this.state.currentSlideIndex];
+  }
+
+  renderCounter() {
+    const {label} = this.getCurrentPageProps();
+    return <Counter label={label} />;
   }
 }
 
