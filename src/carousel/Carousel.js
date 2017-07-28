@@ -68,6 +68,7 @@ class Carousel extends Component {
     }
 
     return (
+      <div id="carousel">
       <div className="lb-c-carousel">
 
         <div className="lb-c-carousel__slide" style={styles}>
@@ -89,6 +90,7 @@ class Carousel extends Component {
 
         </div>
 
+      </div>
       </div>
     );
   }
