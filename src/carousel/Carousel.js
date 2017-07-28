@@ -99,8 +99,10 @@ class Carousel extends Component {
         return (
           <div key={page.id} className="lb-c-carousel__item">
             <Page
+              id={page.id}
               imageUrl={page.url}
               readyToLoad={page.readyToLoad}
+              onLoad={id => console.log(`loaded page ${id}`)}
             />
           </div>
         );
