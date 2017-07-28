@@ -15,6 +15,7 @@ class Page extends Component {
     const imgProps = {
       alt: this.props.imageUrl,
       className: 'lb-c-page__image',
+      // TODO use a blank data url placeholder? img w/o src might not be valid
       src: this.props.readyToLoad ? this.props.imageUrl : null,
       onLoad: this.handleImageLoad
     };
