@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import './Controls.css';
 import FullscreenButton from '../fullscreen-button/FullscreenButton';
 
@@ -11,14 +11,18 @@ class Controls extends Component {
         return (
       <div className="lb-c-controls">
         <button className="lb-c-controls__button" onClick="">{commentaryIcon}</button>
-        <FullscreenButton fullScreenId="body"/>
+        <FullscreenButton {...this.props.fullscreen} />
       </div>
     );
   }
 }
 
-// Controls.propTypes = {
-//   current: PropTypes.string.isRequired,
-//   total: PropTypes.string.isRequired
-// }
+Controls.propTypes = {
+  fullscreen: PropTypes.shape({
+    // are we currently in fullscreen mode
+    isFullscreen: PropTypes.bool.isRequired,
+    onClick: PropTypes.func.isRequired
+  })
+}
+
 export default Controls;

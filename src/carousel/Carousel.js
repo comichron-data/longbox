@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 // import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
+import fscreen from 'fscreen';
+
 import './Carousel.css';
 
 import Page from '../page/Page';
@@ -21,12 +23,43 @@ class Carousel extends Component {
     this.state = {
       pages,
       slideCount: pages.length,
-      currentSlideIndex: 0
+      currentSlideIndex: 0,
+      // This only controls icon of fullscreen button. We use `fscreen` as the
+      // source of truth for determining if we're fullscreen
+      isFullscreen: false
     };
 
     // pre-bind event handlers
     this.handleForwardClick = this.handleForwardClick.bind(this);
     this.handleBackClick = this.handleBackClick.bind(this);
+    this.handleToggleFullscreen = this.handleToggleFullscreen.bind(this);
+    this.syncFullscreen = this.syncFullscreen.bind(this);
+  }
+
+  componentDidMount() {
+    fscreen.addEventListener('fullscreenchange', this.syncFullscreen);
+  }
+
+  componentWillUnmount() {
+    fscreen.removeEventListener('fullscreenchange', this.syncFullscreen);
+  }
+
+  syncFullscreen() {
+    this.setState({
+      isFullscreen: this.isFullscreen()
+    });
+  }
+
+  isFullscreen() {
+    return fscreen.fullscreenElement != null;
+  }
+
+  handleToggleFullscreen() {
+    if (this.isFullscreen()) {
+      fscreen.exitFullscreen();
+    } else {
+      fscreen.requestFullscreen(document.documentElement);
+    }
   }
 
   handleForwardClick() {
@@ -85,7 +118,7 @@ class Carousel extends Component {
           </div>
 
           <div className="lb-js-carousel__ui lb-c-carousel__toolbar lb-c-carousel__toolbar--controls">
-            <Controls />
+            {this.renderControls()}
           </div>
 
         </div>
@@ -93,6 +126,17 @@ class Carousel extends Component {
       </div>
       </div>
     );
+  }
+
+  renderControls() {
+    const props = {
+      fullscreen: {
+        isFullscreen: this.state.isFullscreen,
+        onClick: this.handleToggleFullscreen
+      }
+    };
+
+    return <Controls {...props} />;
   }
 
   renderPages() {
