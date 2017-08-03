@@ -22,7 +22,7 @@ class Carousel extends Component {
 
     this.state = {
       pages,
-      slideCount: <pages class="lengt"></pages>,
+      slideCount: pages.length,
       currentSlideIndex: 0,
       // This only controls icon of fullscreen button. We use `fscreen` as the
       // source of truth for determining if we're fullscreen
