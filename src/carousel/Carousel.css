@@ -38,10 +38,20 @@
   position: absolute;
   text-align: center;
   width: 100%;
+  transition: opacity .2s, transform .15s;
+  opacity: 0;
 }
+
 .lb-c-carousel__toolbar--counter {
   bottom: 1em;
+  transform: translateY(10em);
 }
 .lb-c-carousel__toolbar--controls {
   top: 1em;
+  transform: translateY(-10em);
+}
+
+.lb-js-carousel__toolbar--isVisble {
+	opacity: 1;
+	transform: translateY(0);
 }
