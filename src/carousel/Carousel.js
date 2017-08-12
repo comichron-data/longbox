@@ -111,28 +111,28 @@ class Carousel extends Component {
 
     return (
       <div id="carousel">
-      <div className="lb-c-carousel">
+        <div className="lb-c-carousel">
 
-        <div className="lb-c-carousel__slide" style={styles}>
-          {this.renderPages()}
+          <div className="lb-c-carousel__slide" style={styles}>
+            {this.renderPages()}
+          </div>
+
+          <div className="lb-c-carousel__ui">
+
+            <Navigation
+              buttonCount={3}
+              onPrimaryClick={this.handlePrimaryClick}
+              onSecondaryClick={this.handleSecondaryClick}
+              onTertiaryClick={this.handleTertiaryClick}
+            >
+            </Navigation>
+
+            {this.renderCounter()}
+            {this.renderControls()}
+
+          </div>
+
         </div>
-
-        <div className="lb-c-carousel__ui">
-
-          <Navigation
-            buttonCount={3}
-            onPrimaryClick={this.handlePrimaryClick}
-            onSecondaryClick={this.handleSecondaryClick}
-            onTertiaryClick={this.handleTertiaryClick}
-          >
-          </Navigation>
-
-          {this.renderCounter()}
-          {this.renderControls()}
-
-        </div>
-
-      </div>
       </div>
     );
   }
