@@ -72,15 +72,24 @@ class Carousel extends Component {
   }
 
   handlePrimaryClick() {
-    this.scrollToTop();
-    this.goToPage(this.state.currentSlideIndex + 1);
+    const success = this.goToPage(this.state.currentSlideIndex + 1);
+
+    if (success) {
+      this.scrollToTop();
+    }
   }
 
   handleSecondaryClick() {
-    this.scrollToTop();
-    this.goToPage(this.state.currentSlideIndex - 1);
+    const success = this.goToPage(this.state.currentSlideIndex - 1);
+
+    if (success) {
+      this.scrollToTop();
+    }
   }
 
+  /**
+  * @return {Boolean} true if page change was successful, false otherwise
+  */
   goToPage(pageNumber) {
     if (pageNumber >= 0 && pageNumber < this.state.slideCount) {
       const pages = this.state.pages
@@ -96,11 +105,15 @@ class Carousel extends Component {
         pages,
         currentSlideIndex: pageNumber
       });
+
+      return true;
+    } else {
+      return false;
     }
   }
 
   scrollToTop() {
-    ReactDOM.findDOMNode(this).scrollIntoView({block: "end", behavior: "smooth"});
+    ReactDOM.findDOMNode(this).scrollIntoView();
   }
 
   render() {
