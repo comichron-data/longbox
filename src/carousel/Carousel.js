@@ -100,7 +100,7 @@ class Carousel extends Component {
   }
 
   scrollToTop() {
-    ReactDOM.findDOMNode(this).scrollIntoView();
+    ReactDOM.findDOMNode(this).scrollIntoView({block: "end", behavior: "smooth"});
   }
 
   render() {

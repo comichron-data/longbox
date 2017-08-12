@@ -47,7 +47,7 @@ class Navigation extends Component {
   renderCenter() {
     if (this.props.buttonCount === 3) {
       return (
-        <NavigationButton key="center" onClick={this.handleTertiaryClick} />
+        <NavigationButton key="center" type="center" onClick={this.handleTertiaryClick} />
       );
     } else {
       return null;

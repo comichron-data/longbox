@@ -4,8 +4,12 @@
 }
 
 .lb-c-navigation__button {
-  flex-grow: 1;
+  flex: 1 1 auto;
 
   /* for debug */
   /*outline: 1px solid blue;*/
+}
+
+.lb-c-navigation__button--center {
+  flex: 0 0 15em;
 }
