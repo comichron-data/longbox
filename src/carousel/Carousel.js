@@ -127,13 +127,8 @@ class Carousel extends Component {
           >
           </Navigation>
 
-          <div className="lb-c-carousel__toolbar lb-c-carousel__toolbar--counter">
-            {this.renderCounter()}
-          </div>
-
-          <div className="lb-js-carousel__ui lb-c-carousel__toolbar lb-c-carousel__toolbar--controls">
-            {this.renderControls()}
-          </div>
+          {this.renderCounter()}
+          {this.renderControls()}
 
         </div>
 
@@ -150,7 +145,18 @@ class Carousel extends Component {
       }
     };
 
-    return <Controls {...props} />;
+    const classes = [
+      'lb-js-carousel__ui',
+      'lb-c-carousel__toolbar',
+      'lb-c-carousel__toolbar--controls',
+      this.state.isShowingControls ? 'lb-js-carousel__toolbar--isVisble' : ''
+    ].join(' ');
+
+    return (
+      <div className={classes}>
+        <Controls {...props} />
+      </div>
+    );
   }
 
   renderPages() {
@@ -175,7 +181,18 @@ class Carousel extends Component {
 
   renderCounter() {
     const {label} = this.getCurrentPageProps();
-    return <Counter label={label} />;
+
+    const classes = [
+      'lb-c-carousel__toolbar',
+      'lb-c-carousel__toolbar--counter',
+      this.state.isShowingControls ? 'lb-js-carousel__toolbar--isVisble' : ''
+    ].join(' ');
+
+    return (
+      <div className={classes}>
+        <Counter label={label} />
+      </div>
+    );
   }
 }
 
