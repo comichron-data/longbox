@@ -8,6 +8,7 @@ import './Carousel.css';
 import Page from '../page/Page';
 import Counter from '../counter/Counter';
 import Controls from '../controls/Controls';
+import Navigation from '../navigation/Navigation';
 
 class Carousel extends Component {
   constructor(props) {
@@ -26,12 +27,14 @@ class Carousel extends Component {
       currentSlideIndex: 0,
       // This only controls icon of fullscreen button. We use `fscreen` as the
       // source of truth for determining if we're fullscreen
-      isFullscreen: false
+      isFullscreen: false,
+      isShowingControls: false
     };
 
     // pre-bind event handlers
-    this.handleForwardClick = this.handleForwardClick.bind(this);
-    this.handleBackClick = this.handleBackClick.bind(this);
+    this.handlePrimaryClick = this.handlePrimaryClick.bind(this);
+    this.handleSecondaryClick = this.handleSecondaryClick.bind(this);
+    this.handleTertiaryClick = this.handleTertiaryClick.bind(this);
     this.handleToggleFullscreen = this.handleToggleFullscreen.bind(this);
     this.syncFullscreen = this.syncFullscreen.bind(this);
   }
@@ -62,12 +65,18 @@ class Carousel extends Component {
     }
   }
 
-  handleForwardClick() {
+  handleTertiaryClick() {
+    this.setState({
+      isShowingControls: !this.state.isShowingControls
+    });
+  }
+
+  handlePrimaryClick() {
     this.scrollToTop();
     this.goToPage(this.state.currentSlideIndex + 1);
   }
 
-  handleBackClick() {
+  handleSecondaryClick() {
     this.scrollToTop();
     this.goToPage(this.state.currentSlideIndex - 1);
   }
@@ -110,8 +119,13 @@ class Carousel extends Component {
 
         <div className="lb-c-carousel__ui">
 
-          <button className="lb-c-carousel__button lb-c-carousel__nav-backward" onClick={this.handleBackClick}></button>
-          <button className="lb-c-carousel__button lb-c-carousel__nav-forward" onClick={this.handleForwardClick}></button>
+          <Navigation
+            buttonCount={3}
+            onPrimaryClick={this.handlePrimaryClick}
+            onSecondaryClick={this.handleSecondaryClick}
+            onTertiaryClick={this.handleTertiaryClick}
+          >
+          </Navigation>
 
           <div className="lb-c-carousel__toolbar lb-c-carousel__toolbar--counter">
             {this.renderCounter()}

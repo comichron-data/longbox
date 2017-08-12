@@ -24,15 +24,6 @@
   width: 100%;
 }
 
-.lb-c-carousel__button {
-  background-color: transparent;
-  border: 0;
-  display: inline-block;
-  outline: none;
-  width: 50%;
-  height: 100%;
-}
-
 .lb-c-carousel__toolbar {
   color: white;
   position: absolute;

@@ -1,0 +1,11 @@
+.lb-c-navigation {
+  display: flex;
+  height: 100%;
+}
+
+.lb-c-navigation__button {
+  flex-grow: 1;
+
+  /* for debug */
+  /*outline: 1px solid blue;*/
+}
