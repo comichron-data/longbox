@@ -3,7 +3,7 @@ import './App.css';
 
 import Carousel from './carousel/Carousel'
 
-const pageCount = 5;
+const pageCount = 15;
 const pages = new Array(pageCount).fill(1)
   .map((p, index, array) => {
     return {
@@ -14,14 +14,12 @@ const pages = new Array(pageCount).fill(1)
     };
   });
 
-// tweak to first and last to simulate page differences
 pages[0].preload = true;
-pages[pages.length - 1].label = 'Back matter 1';
 
 class App extends Component {
   render() {
     return (
-      <Carousel pages={pages} />
+      <Carousel pages={pages} lazyLoadBufferSize={3} />
     );
   }
 }

@@ -4,6 +4,9 @@ import './Page.css';
 
 // import Spinner from '../spinner/Spinner';
 
+// from http://probablyprogramming.com/2009/03/15/the-tiniest-gif-ever
+const spacerGif = 'data:image/gif;base64,R0lGODlhAQABAIABAP///wAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==';
+
 class Page extends Component {
   constructor(props) {
     super(props);
@@ -15,8 +18,7 @@ class Page extends Component {
     const imgProps = {
       alt: this.props.imageUrl,
       className: 'lb-c-page__image',
-      // TODO use a blank data url placeholder? img w/o src might not be valid
-      src: this.props.readyToLoad ? this.props.imageUrl : null,
+      src: this.imageUrl(),
       onLoad: this.handleImageLoad
     };
 
@@ -27,14 +29,20 @@ class Page extends Component {
     );
   }
 
+  imageUrl() {
+    return this.props.readyToLoad ? this.props.imageUrl : spacerGif;
+  }
+
   handleImageLoad() {
-    this.props.onLoad(this.props.id);
+    if (this.props.readyToLoad && this.props.onLoad) {
+      this.props.onLoad(this.props.id);
+    }
   }
 }
 
 Page.propTypes = {
   id: PropTypes.string.isRequired,
-  onLoad: PropTypes.func.isRequired,
+  onLoad: PropTypes.func,
   imageUrl: PropTypes.string.isRequired,
   readyToLoad: PropTypes.bool
 }

@@ -17,7 +17,9 @@ class Carousel extends Component {
     const pages = props.pages
       .map(page => {
         return Object.assign({}, page, {
-          readyToLoad: page.preload
+          readyToLoad: page.preload,
+          // has the page's image been loaded
+          imageLoaded: false
         })
       });
 
@@ -28,10 +30,13 @@ class Carousel extends Component {
       // This only controls icon of fullscreen button. We use `fscreen` as the
       // source of truth for determining if we're fullscreen
       isFullscreen: false,
-      isShowingControls: false
+      isShowingControls: false,
+      // has every preloaded page finsihed loading
+      preloadsDone: false
     };
 
     // pre-bind event handlers
+    this.handlePageLoad = this.handlePageLoad.bind(this);
     this.handlePrimaryClick = this.handlePrimaryClick.bind(this);
     this.handleSecondaryClick = this.handleSecondaryClick.bind(this);
     this.handleTertiaryClick = this.handleTertiaryClick.bind(this);
@@ -45,6 +50,19 @@ class Carousel extends Component {
 
   componentWillUnmount() {
     fscreen.removeEventListener('fullscreenchange', this.syncFullscreen);
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    const pageChanged = prevState.currentSlideIndex !== this.state.currentSlideIndex;
+    const preloadsJustFinished = !prevState.preloadsDone && this.state.preloadsDone;
+
+    if (preloadsJustFinished) {
+      console.log('all preloads are done');
+    }
+
+    if (pageChanged || preloadsJustFinished) {
+      this.lazyLoadLogic();
+    }
   }
 
   syncFullscreen() {
@@ -92,17 +110,7 @@ class Carousel extends Component {
   */
   goToPage(pageNumber) {
     if (pageNumber >= 0 && pageNumber < this.state.slideCount) {
-      const pages = this.state.pages
-        .map((page, index) => {
-          if (index === pageNumber) {
-            return Object.assign({}, page, {readyToLoad: true});
-          } else {
-            return page;
-          }
-        });
-
       this.setState({
-        pages,
         currentSlideIndex: pageNumber
       });
 
@@ -181,11 +189,56 @@ class Carousel extends Component {
               id={page.id}
               imageUrl={page.url}
               readyToLoad={page.readyToLoad}
-              onLoad={id => console.log(`loaded page ${id}`)}
+              onLoad={this.handlePageLoad}
             />
           </div>
         );
       });
+  }
+
+  handlePageLoad(id) {
+    console.log(`page ${id} loaded`);
+
+    const pages = this.state.pages;
+    const index = pages.findIndex(p => p.id === id);
+
+    if (index !== -1) {
+      const newPage = Object.assign({}, pages[index], {imageLoaded: true});
+      const newPages = [
+        ...pages.slice(0, index),
+        newPage,
+        ...pages.slice(index + 1)
+      ];
+
+      const preloaded = newPages.filter(p => p.preload);
+
+      this.setState({
+        pages: newPages,
+        preloadsDone: preloaded.every(p => p.imageLoaded)
+      });
+    } else {
+      throw new Error(`page id not found in pages array: ${id}`);
+    }
+  }
+
+  lazyLoadLogic() {
+    const start = this.state.currentSlideIndex + 1;
+    const end = start + this.props.lazyLoadBufferSize;
+
+    const pages = this.state.pages
+      .map((page, index) => {
+        if (index >= start && index < end) {
+          return Object.assign({}, page, {
+            readyToLoad: true
+          });
+        } else {
+          return page;
+        }
+      });
+
+    this.setState({
+      pages
+    });
   }
 
   getCurrentPageProps() {
