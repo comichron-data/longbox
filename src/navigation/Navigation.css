@@ -11,5 +11,6 @@
 }
 
 .lb-c-navigation__button--center {
-  flex: 0 0 15em;
+  flex: 0 0 25%;
+  max-width: 160px;
 }
