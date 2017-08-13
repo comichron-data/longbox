@@ -30,7 +30,9 @@ class Carousel extends Component {
       // This only controls icon of fullscreen button. We use `fscreen` as the
       // source of truth for determining if we're fullscreen
       isFullscreen: false,
-      isShowingControls: false
+      isShowingControls: false,
+      // has every preloaded page finsihed loading
+      preloadsDone: false
     };
 
     // pre-bind event handlers
@@ -48,6 +50,19 @@ class Carousel extends Component {
 
   componentWillUnmount() {
     fscreen.removeEventListener('fullscreenchange', this.syncFullscreen);
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    const pageChanged = prevState.currentSlideIndex !== this.state.currentSlideIndex;
+    const preloadsJustFinished = !prevState.preloadsDone && this.state.preloadsDone;
+
+    if (preloadsJustFinished) {
+      console.log('all preloads are done');
+    }
+
+    if (pageChanged || preloadsJustFinished) {
+      this.lazyLoadLogic();
+    }
   }
 
   syncFullscreen() {
@@ -95,17 +110,7 @@ class Carousel extends Component {
   */
   goToPage(pageNumber) {
     if (pageNumber >= 0 && pageNumber < this.state.slideCount) {
-      const pages = this.state.pages
-        .map((page, index) => {
-          if (index === pageNumber) {
-            return Object.assign({}, page, {readyToLoad: true});
-          } else {
-            return page;
-          }
-        });
-
       this.setState({
-        pages,
         currentSlideIndex: pageNumber
       });
 
@@ -206,13 +211,10 @@ class Carousel extends Component {
       ];
 
       const preloaded = newPages.filter(p => p.preload);
-      if (preloaded.every(p => p.imageLoaded)) {
-        console.log('all preloaded pages have loaded');
-        this.lazyLoadLogic();
-      }
 
       this.setState({
-        pages: newPages
+        pages: newPages,
+        preloadsDone: preloaded.every(p => p.imageLoaded)
       });
     } else {
       throw new Error(`page id not found in pages array: ${id}`);
@@ -236,7 +238,7 @@ class Carousel extends Component {
 
     this.setState({
       pages
-    })
+    });
   }
 
   getCurrentPageProps() {
