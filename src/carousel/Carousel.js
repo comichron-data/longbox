@@ -208,6 +208,7 @@ class Carousel extends Component {
       const preloaded = newPages.filter(p => p.preload);
       if (preloaded.every(p => p.imageLoaded)) {
         console.log('all preloaded pages have loaded');
+        this.lazyLoadLogic();
       }
 
       this.setState({
@@ -216,6 +217,26 @@ class Carousel extends Component {
     } else {
       throw new Error(`page id not found in pages array: ${id}`);
     }
+  }
+
+  lazyLoadLogic() {
+    const start = this.state.currentSlideIndex + 1;
+    const end = start + this.props.lazyLoadBufferSize;
+
+    const pages = this.state.pages
+      .map((page, index) => {
+        if (index >= start && index < end) {
+          return Object.assign({}, page, {
+            readyToLoad: true
+          });
+        } else {
+          return page;
+        }
+      });
+
+    this.setState({
+      pages
+    })
   }
 
   getCurrentPageProps() {
