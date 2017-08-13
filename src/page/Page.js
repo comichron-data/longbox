@@ -34,7 +34,7 @@ class Page extends Component {
   }
 
   handleImageLoad() {
-    if (this.props.readyToLoad) {
+    if (this.props.readyToLoad && this.props.onLoad) {
       this.props.onLoad(this.props.id);
     }
   }
@@ -42,7 +42,7 @@ class Page extends Component {
 
 Page.propTypes = {
   id: PropTypes.string.isRequired,
-  onLoad: PropTypes.func.isRequired,
+  onLoad: PropTypes.func,
   imageUrl: PropTypes.string.isRequired,
   readyToLoad: PropTypes.bool
 }
