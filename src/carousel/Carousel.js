@@ -17,7 +17,9 @@ class Carousel extends Component {
     const pages = props.pages
       .map(page => {
         return Object.assign({}, page, {
-          readyToLoad: page.preload
+          readyToLoad: page.preload,
+          // has the page's image been loaded
+          imageLoaded: false
         })
       });
 
@@ -32,6 +34,7 @@ class Carousel extends Component {
     };
 
     // pre-bind event handlers
+    this.handlePageLoad = this.handlePageLoad.bind(this);
     this.handlePrimaryClick = this.handlePrimaryClick.bind(this);
     this.handleSecondaryClick = this.handleSecondaryClick.bind(this);
     this.handleTertiaryClick = this.handleTertiaryClick.bind(this);
@@ -181,11 +184,30 @@ class Carousel extends Component {
               id={page.id}
               imageUrl={page.url}
               readyToLoad={page.readyToLoad}
-              onLoad={id => console.log(`loaded page ${id}`)}
+              onLoad={this.handlePageLoad}
             />
           </div>
         );
       });
+  }
+
+  handlePageLoad(id) {
+    console.log(`page ${id} loaded`);
+
+    const pages = this.state.pages;
+    const index = pages.findIndex(p => p.id === id);
+    if (index !== -1) {
+      const newPage = Object.assign({}, pages[index], {imageLoaded: true});
+      this.setState({
+        pages: [
+          ...pages.slice(0, index),
+          newPage,
+          ...pages.slice(index + 1)
+        ]
+      });
+    } else {
+      throw new Error(`page id not found in pages array: ${id}`);
+    }
   }
 
   getCurrentPageProps() {
