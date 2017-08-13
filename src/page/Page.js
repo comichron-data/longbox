@@ -18,7 +18,7 @@ class Page extends Component {
     const imgProps = {
       alt: this.props.imageUrl,
       className: 'lb-c-page__image',
-      src: this.props.readyToLoad ? this.props.imageUrl : spacerGif,
+      src: this.imageUrl(),
       onLoad: this.handleImageLoad
     };
 
@@ -27,6 +27,10 @@ class Page extends Component {
         <img {...imgProps} />
       </div>
     );
+  }
+
+  imageUrl() {
+    return this.props.readyToLoad ? this.props.imageUrl : spacerGif;
   }
 
   handleImageLoad() {
