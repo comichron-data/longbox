@@ -196,14 +196,22 @@ class Carousel extends Component {
 
     const pages = this.state.pages;
     const index = pages.findIndex(p => p.id === id);
+
     if (index !== -1) {
       const newPage = Object.assign({}, pages[index], {imageLoaded: true});
+      const newPages = [
+        ...pages.slice(0, index),
+        newPage,
+        ...pages.slice(index + 1)
+      ];
+
+      const preloaded = newPages.filter(p => p.preload);
+      if (preloaded.every(p => p.imageLoaded)) {
+        console.log('all preloaded pages have loaded');
+      }
+
       this.setState({
-        pages: [
-          ...pages.slice(0, index),
-          newPage,
-          ...pages.slice(index + 1)
-        ]
+        pages: newPages
       });
     } else {
       throw new Error(`page id not found in pages array: ${id}`);
