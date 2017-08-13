@@ -34,7 +34,9 @@ class Page extends Component {
   }
 
   handleImageLoad() {
-    this.props.onLoad(this.props.id);
+    if (this.props.readyToLoad) {
+      this.props.onLoad(this.props.id);
+    }
   }
 }
 
