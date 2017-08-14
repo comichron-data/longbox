@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
 import fscreen from 'fscreen';
 
@@ -11,6 +11,22 @@ import Controls from '../controls/Controls';
 import Navigation from '../navigation/Navigation';
 
 class Carousel extends Component {
+  static propTypes = {
+    pages: PropTypes.arrayOf(
+      PropTypes.shape({
+        id: PropTypes.string.isRequired,
+        url: PropTypes.string,
+        preload: PropTypes.boolean,
+        label: PropTypes.string,
+      })
+    ).isRequired,
+    lazyLoadBufferSize: PropTypes.number
+  };
+
+  static defaultProps = {
+    lazyLoadBufferSize: 1
+  };
+
   constructor(props) {
     super(props);
 
