@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
-import './App.css';
+import {connect} from 'react-redux';
 
+import './App.css';
 import Carousel from './carousel/Carousel'
+
 
 const pageCount = 15;
 const pages = new Array(pageCount).fill(1)
@@ -19,9 +21,18 @@ pages[0].preload = true;
 class App extends Component {
   render() {
     return (
-      <Carousel pages={pages} lazyLoadBufferSize={3} />
+      <div>
+        <span>{this.props.data}</span>
+        <Carousel pages={pages} lazyLoadBufferSize={3} />
+      </div>
     );
   }
 }
 
-export default App;
+function mapStateToProps(state) {
+  return {
+    data: state.value
+  }
+}
+
+export default connect(mapStateToProps)(App);
