@@ -1,7 +1,7 @@
 export const GO_TO_NEXT_PAGE = 'GO_TO_NEXT_PAGE';
 export const GO_TO_PREVIOUS_PAGE = 'GO_TO_PREVIOUS_PAGE';
 
-
+export const TOGGLE_CONTROLS = 'TOGGLE_CONTROLS';
 
 export function goToNextPage() {
   return {
@@ -12,6 +12,12 @@ export function goToNextPage() {
 export function goToPreviousPage() {
   return {
     type: GO_TO_PREVIOUS_PAGE
+  };
+}
+
+export function toggleControls() {
+  return {
+    type: TOGGLE_CONTROLS
   };
 }
 

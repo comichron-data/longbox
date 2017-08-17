@@ -4,8 +4,10 @@ import PropTypes from 'prop-types';
 
 import {
   goToNextPage,
-  goToPreviousPage
+  goToPreviousPage,
+  toggleControls
 } from './actions';
+
 import './App.css';
 import Carousel from './carousel/Carousel'
 
@@ -38,6 +40,8 @@ class App extends Component {
         onNextPage={this.props.onNextPage}
         onPreviousPage={this.props.onPreviousPage}
         currentPageIndex={this.props.currentPageIndex}
+        isShowingControls={this.props.isShowingControls}
+        onToggleControls={this.props.onToggleControls}
         lazyLoadBufferSize={3}
       />
     );
@@ -50,13 +54,15 @@ function mapStateToProps(state) {
 
   return {
     pages,
-    currentPageIndex: state.pages.currentPageIndex
+    currentPageIndex: state.pages.currentPageIndex,
+    isShowingControls: state.controls.visible
   }
 }
 
 const mapDispatchToProps = {
   onNextPage: goToNextPage,
-  onPreviousPage: goToPreviousPage
+  onPreviousPage: goToPreviousPage,
+  onToggleControls: toggleControls
 };
 
 

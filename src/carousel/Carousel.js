@@ -16,10 +16,14 @@ class Carousel extends Component {
       PropTypes.shape({
         id: PropTypes.string.isRequired,
         url: PropTypes.string,
-        preload: PropTypes.boolean,
+        preload: PropTypes.bool,
         label: PropTypes.string,
       })
     ).isRequired,
+    isShowingControls: PropTypes.bool.isRequired,
+    onToggleControls: PropTypes.func.isRequired,
+    onNextPage: PropTypes.func.isRequired,
+    onPreviousPage: PropTypes.func.isRequired,
     lazyLoadBufferSize: PropTypes.number
   };
 
@@ -46,7 +50,6 @@ class Carousel extends Component {
       // This only controls icon of fullscreen button. We use `fscreen` as the
       // source of truth for determining if we're fullscreen
       isFullscreen: false,
-      isShowingControls: false,
       // has every preloaded page finsihed loading
       preloadsDone: false
     };
@@ -100,9 +103,10 @@ class Carousel extends Component {
   }
 
   handleTertiaryClick() {
-    this.setState({
-      isShowingControls: !this.state.isShowingControls
-    });
+    this.props.onToggleControls();
+    // this.setState({
+    //   isShowingControls: !this.state.isShowingControls
+    // });
   }
 
   handlePrimaryClick() {
@@ -190,7 +194,7 @@ class Carousel extends Component {
       'lb-js-carousel__ui',
       'lb-c-carousel__toolbar',
       'lb-c-carousel__toolbar--controls',
-      this.state.isShowingControls ? 'lb-js-carousel__toolbar--isVisble' : ''
+      this.props.isShowingControls ? 'lb-js-carousel__toolbar--isVisble' : ''
     ].join(' ');
 
     return (
@@ -271,7 +275,7 @@ class Carousel extends Component {
     const classes = [
       'lb-c-carousel__toolbar',
       'lb-c-carousel__toolbar--counter',
-      this.state.isShowingControls ? 'lb-js-carousel__toolbar--isVisble' : ''
+      this.props.isShowingControls ? 'lb-js-carousel__toolbar--isVisble' : ''
     ].join(' ');
 
     return (
