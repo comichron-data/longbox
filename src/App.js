@@ -45,8 +45,11 @@ class App extends Component {
 }
 
 function mapStateToProps(state) {
+  const pages = state.pages.idsInOrder
+    .map(id => state.pages.byId[id]);
+
   return {
-    pages: state.pages.pages,
+    pages,
     currentPageIndex: state.pages.currentPageIndex
   }
 }
