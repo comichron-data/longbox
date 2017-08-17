@@ -106,19 +106,23 @@ class Carousel extends Component {
   }
 
   handlePrimaryClick() {
-    const success = this.goToPage(this.state.currentSlideIndex + 1);
+    this.props.onNextPage();
 
-    if (success) {
-      this.scrollToTop();
-    }
+    // const success = this.goToPage(this.state.currentSlideIndex + 1);
+    //
+    // if (success) {
+    //   this.scrollToTop();
+    // }
   }
 
   handleSecondaryClick() {
-    const success = this.goToPage(this.state.currentSlideIndex - 1);
+    this.props.onPreviousPage();
 
-    if (success) {
-      this.scrollToTop();
-    }
+    // const success = this.goToPage(this.state.currentSlideIndex - 1);
+    //
+    // if (success) {
+    //   this.scrollToTop();
+    // }
   }
 
   /**
@@ -143,7 +147,7 @@ class Carousel extends Component {
   render() {
     const styles = {
       width: `${(this.state.pages.length * 100)}vw`, // page count * 100vw
-      transform: `translateX(-${this.state.currentSlideIndex * 100}vw)` // {-(page number index) * 100vw}
+      transform: `translateX(-${this.props.currentPageIndex * 100}vw)` // {-(page number index) * 100vw}
     }
 
     return (

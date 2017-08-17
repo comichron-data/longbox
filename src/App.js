@@ -1,6 +1,11 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
+import PropTypes from 'prop-types';
 
+import {
+  goToNextPage,
+  goToPreviousPage
+} from './actions';
 import './App.css';
 import Carousel from './carousel/Carousel'
 
@@ -19,20 +24,37 @@ const pages = new Array(pageCount).fill(1)
 pages[0].preload = true;
 
 class App extends Component {
+  static propTypes = {
+    currentPageIndex: PropTypes.number.isRequired,
+    pages: PropTypes.array.isRequired,
+    onNextPage: PropTypes.func.isRequired,
+    onPreviousPage: PropTypes.func.isRequired
+  };
+
   render() {
     return (
-      <div>
-        <span>{this.props.data}</span>
-        <Carousel pages={pages} lazyLoadBufferSize={3} />
-      </div>
+      <Carousel
+        pages={pages}
+        onNextPage={this.props.onNextPage}
+        onPreviousPage={this.props.onPreviousPage}
+        currentPageIndex={this.props.currentPageIndex}
+        lazyLoadBufferSize={3}
+      />
     );
   }
 }
 
 function mapStateToProps(state) {
   return {
-    data: state.value
+    pages: state.pages.pages,
+    currentPageIndex: state.pages.currentPageIndex
   }
 }
 
-export default connect(mapStateToProps)(App);
+const mapDispatchToProps = {
+  onNextPage: goToNextPage,
+  onPreviousPage: goToPreviousPage
+};
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
