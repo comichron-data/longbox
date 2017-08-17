@@ -2,12 +2,12 @@ import fscreen from 'fscreen';
 
 import {
   TOGGLE_FULLSCREEN,
-  fullscreenChanged
+  changeFullscreen
 } from '../actions';
 
 export default store => {
-  fscreen.addEventListener('fullscreenchange', event => {
-    store.dispatch(fullscreenChanged(isFullscreen()));
+  fscreen.addEventListener('fullscreenchange', () => {
+    store.dispatch(changeFullscreen(isFullscreen()));
   });
 
   return next => action => {

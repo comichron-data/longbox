@@ -5,7 +5,7 @@ export const TOGGLE_CONTROLS = 'TOGGLE_CONTROLS';
 // user using UI to manipulate fscreen
 export const TOGGLE_FULLSCREEN = 'TOGGLE_FULLSCREEN';
 // fscreen telling us that its state has changed
-export const FULLSCREEN_CHANGED = 'FULLSCREEN_CHANGED';
+export const CHANGE_FULLSCREEN = 'CHANGE_FULLSCREEN';
 
 export function toggleFullscreen() {
   return {
@@ -13,9 +13,9 @@ export function toggleFullscreen() {
   };
 }
 
-export function fullscreenChanged(isFullscreen) {
+export function changeFullscreen(isFullscreen) {
   return {
-    type: FULLSCREEN_CHANGED,
+    type: CHANGE_FULLSCREEN,
     payload: {
       isFullscreen
     }
