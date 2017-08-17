@@ -7,21 +7,24 @@ export default function pagesReducer(state, action) {
   state = state || {
     byId: {
       '1': {
-        id: 1,
+        id: '1',
         url: 'http://www.harkavagrant.com/history/wutheringsixsm.png',
         preload: true,
+        readyToLoad: true,
         label: 'page 1'
       },
       '2': {
-        id: 2,
+        id: '2',
         url: 'http://www.harkavagrant.com/history/wutheringsixsm.png',
         preload: false,
+        readyToLoad: false,
         label: 'page 2'
       },
       '3': {
-        id: 3,
+        id: '3',
         url: 'http://www.harkavagrant.com/history/wutheringsixsm.png',
         preload: false,
+        readyToLoad: false,
         label: 'page 3'
       }
     },

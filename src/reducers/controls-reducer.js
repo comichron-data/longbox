@@ -1,10 +1,12 @@
 import {
-  TOGGLE_CONTROLS
+  TOGGLE_CONTROLS,
+  FULLSCREEN_CHANGED
 } from '../actions';
 
 export default function controlsReducer(state, action) {
   state = state || {
-    visible: false
+    visible: false,
+    isFullscreen: false
   };
 
   switch (action.type) {
@@ -12,6 +14,11 @@ export default function controlsReducer(state, action) {
       return {
         ...state,
         visible: !state.visible
+      };
+    case FULLSCREEN_CHANGED:
+      return {
+        ...state,
+        isFullscreen: action.payload.isFullscreen
       };
     default:
       return state;

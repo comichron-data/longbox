@@ -5,43 +5,37 @@ import PropTypes from 'prop-types';
 import {
   goToNextPage,
   goToPreviousPage,
-  toggleControls
+  toggleControls,
+  toggleFullscreen
 } from './actions';
 
 import './App.css';
 import Carousel from './carousel/Carousel'
 
 
-const pageCount = 15;
-const pages = new Array(pageCount).fill(1)
-  .map((p, index, array) => {
-    return {
-      id: `page-${index}`,
-      url: 'http://www.harkavagrant.com/history/wutheringsixsm.png',
-      preload: false,
-      label: `${index + 1} of ${array.length}`
-    };
-  });
-
-pages[0].preload = true;
-
 class App extends Component {
   static propTypes = {
     currentPageIndex: PropTypes.number.isRequired,
     pages: PropTypes.array.isRequired,
+    isShowingControls: PropTypes.bool.isRequired,
+    isFullscreen: PropTypes.bool.isRequired,
+
     onNextPage: PropTypes.func.isRequired,
-    onPreviousPage: PropTypes.func.isRequired
+    onPreviousPage: PropTypes.func.isRequired,
+    onToggleFullscreen: PropTypes.func.isRequired
   };
 
   render() {
     return (
       <Carousel
-        pages={pages}
+        pages={this.props.pages}
         onNextPage={this.props.onNextPage}
         onPreviousPage={this.props.onPreviousPage}
         currentPageIndex={this.props.currentPageIndex}
         isShowingControls={this.props.isShowingControls}
+        isFullscreen={this.props.isFullscreen}
         onToggleControls={this.props.onToggleControls}
+        onToggleFullscreen={this.props.onToggleFullscreen}
         lazyLoadBufferSize={3}
       />
     );
@@ -55,14 +49,16 @@ function mapStateToProps(state) {
   return {
     pages,
     currentPageIndex: state.pages.currentPageIndex,
-    isShowingControls: state.controls.visible
+    isShowingControls: state.controls.visible,
+    isFullscreen: state.controls.isFullscreen
   }
 }
 
 const mapDispatchToProps = {
   onNextPage: goToNextPage,
   onPreviousPage: goToPreviousPage,
-  onToggleControls: toggleControls
+  onToggleControls: toggleControls,
+  onToggleFullscreen: toggleFullscreen
 };
 
 

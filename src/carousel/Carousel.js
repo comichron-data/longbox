@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
-import fscreen from 'fscreen';
 
 import './Carousel.css';
 
@@ -12,6 +11,7 @@ import Navigation from '../navigation/Navigation';
 
 class Carousel extends Component {
   static propTypes = {
+    currentPageIndex: PropTypes.number.isRequired,
     pages: PropTypes.arrayOf(
       PropTypes.shape({
         id: PropTypes.string.isRequired,
@@ -21,7 +21,9 @@ class Carousel extends Component {
       })
     ).isRequired,
     isShowingControls: PropTypes.bool.isRequired,
+    isFullscreen: PropTypes.bool.isRequired,
     onToggleControls: PropTypes.func.isRequired,
+    onToggleFullscreen: PropTypes.func.isRequired,
     onNextPage: PropTypes.func.isRequired,
     onPreviousPage: PropTypes.func.isRequired,
     lazyLoadBufferSize: PropTypes.number
@@ -34,114 +36,37 @@ class Carousel extends Component {
   constructor(props) {
     super(props);
 
-    const pages = props.pages
-      .map(page => {
-        return Object.assign({}, page, {
-          readyToLoad: page.preload,
-          // has the page's image been loaded
-          imageLoaded: false
-        })
-      });
-
-    this.state = {
-      pages,
-      slideCount: pages.length,
-      currentSlideIndex: 0,
-      // This only controls icon of fullscreen button. We use `fscreen` as the
-      // source of truth for determining if we're fullscreen
-      isFullscreen: false,
-      // has every preloaded page finsihed loading
-      preloadsDone: false
-    };
-
     // pre-bind event handlers
     this.handlePageLoad = this.handlePageLoad.bind(this);
     this.handlePrimaryClick = this.handlePrimaryClick.bind(this);
     this.handleSecondaryClick = this.handleSecondaryClick.bind(this);
     this.handleTertiaryClick = this.handleTertiaryClick.bind(this);
     this.handleToggleFullscreen = this.handleToggleFullscreen.bind(this);
-    this.syncFullscreen = this.syncFullscreen.bind(this);
   }
 
-  componentDidMount() {
-    fscreen.addEventListener('fullscreenchange', this.syncFullscreen);
-  }
-
-  componentWillUnmount() {
-    fscreen.removeEventListener('fullscreenchange', this.syncFullscreen);
-  }
-
-  componentDidUpdate(prevProps, prevState) {
-    const pageChanged = prevState.currentSlideIndex !== this.state.currentSlideIndex;
-    const preloadsJustFinished = !prevState.preloadsDone && this.state.preloadsDone;
-
-    if (preloadsJustFinished) {
-      console.log('all preloads are done');
-    }
-
-    if (pageChanged || preloadsJustFinished) {
-      this.lazyLoadLogic();
-    }
-  }
-
-  syncFullscreen() {
-    this.setState({
-      isFullscreen: this.isFullscreen()
-    });
-  }
-
-  isFullscreen() {
-    return fscreen.fullscreenElement != null;
-  }
-
-  handleToggleFullscreen() {
-    if (this.isFullscreen()) {
-      fscreen.exitFullscreen();
-    } else {
-      fscreen.requestFullscreen(document.documentElement);
-    }
-  }
+  // componentDidUpdate(prevProps, prevState) {
+  //   const pageChanged = prevState.currentSlideIndex !== this.state.currentSlideIndex;
+  //   const preloadsJustFinished = !prevState.preloadsDone && this.state.preloadsDone;
+  //
+  //   if (preloadsJustFinished) {
+  //     console.log('all preloads are done');
+  //   }
+  //
+  //   if (pageChanged || preloadsJustFinished) {
+  //     this.lazyLoadLogic();
+  //   }
+  // }
 
   handleTertiaryClick() {
     this.props.onToggleControls();
-    // this.setState({
-    //   isShowingControls: !this.state.isShowingControls
-    // });
   }
 
   handlePrimaryClick() {
     this.props.onNextPage();
-
-    // const success = this.goToPage(this.state.currentSlideIndex + 1);
-    //
-    // if (success) {
-    //   this.scrollToTop();
-    // }
   }
 
   handleSecondaryClick() {
     this.props.onPreviousPage();
-
-    // const success = this.goToPage(this.state.currentSlideIndex - 1);
-    //
-    // if (success) {
-    //   this.scrollToTop();
-    // }
-  }
-
-  /**
-  * @return {Boolean} true if page change was successful, false otherwise
-  */
-  goToPage(pageNumber) {
-    if (pageNumber >= 0 && pageNumber < this.state.slideCount) {
-      this.setState({
-        currentSlideIndex: pageNumber
-      });
-
-      return true;
-    } else {
-      return false;
-    }
   }
 
   scrollToTop() {
@@ -150,7 +75,7 @@ class Carousel extends Component {
 
   render() {
     const styles = {
-      width: `${(this.state.pages.length * 100)}vw`, // page count * 100vw
+      width: `${(this.props.pages.length * 100)}vw`, // page count * 100vw
       transform: `translateX(-${this.props.currentPageIndex * 100}vw)` // {-(page number index) * 100vw}
     }
 
@@ -164,14 +89,7 @@ class Carousel extends Component {
 
           <div className="lb-c-carousel__ui">
 
-            <Navigation
-              buttonCount={3}
-              onPrimaryClick={this.handlePrimaryClick}
-              onSecondaryClick={this.handleSecondaryClick}
-              onTertiaryClick={this.handleTertiaryClick}
-            >
-            </Navigation>
-
+            {this.renderNavigation()}
             {this.renderCounter()}
             {this.renderControls()}
 
@@ -182,10 +100,21 @@ class Carousel extends Component {
     );
   }
 
+  renderNavigation() {
+    const props = {
+      buttonCount: 3,
+      onPrimaryClick: this.handlePrimaryClick,
+      onSecondaryClick: this.handleSecondaryClick,
+      onTertiaryClick: this.handleTertiaryClick
+    };
+
+    return <Navigation {...props} />;
+  }
+
   renderControls() {
     const props = {
       fullscreen: {
-        isFullscreen: this.state.isFullscreen,
+        isFullscreen: this.props.isFullscreen,
         onClick: this.handleToggleFullscreen
       }
     };
@@ -204,8 +133,12 @@ class Carousel extends Component {
     );
   }
 
+  handleToggleFullscreen() {
+    this.props.onToggleFullscreen();
+  }
+
   renderPages() {
-    return this.state.pages
+    return this.props.pages
       .map(page => {
         return (
           <div key={page.id} className="lb-c-carousel__item">
@@ -223,26 +156,26 @@ class Carousel extends Component {
   handlePageLoad(id) {
     console.log(`page ${id} loaded`);
 
-    const pages = this.state.pages;
-    const index = pages.findIndex(p => p.id === id);
-
-    if (index !== -1) {
-      const newPage = Object.assign({}, pages[index], {imageLoaded: true});
-      const newPages = [
-        ...pages.slice(0, index),
-        newPage,
-        ...pages.slice(index + 1)
-      ];
-
-      const preloaded = newPages.filter(p => p.preload);
-
-      this.setState({
-        pages: newPages,
-        preloadsDone: preloaded.every(p => p.imageLoaded)
-      });
-    } else {
-      throw new Error(`page id not found in pages array: ${id}`);
-    }
+    // const pages = this.state.pages;
+    // const index = pages.findIndex(p => p.id === id);
+    //
+    // if (index !== -1) {
+    //   const newPage = Object.assign({}, pages[index], {imageLoaded: true});
+    //   const newPages = [
+    //     ...pages.slice(0, index),
+    //     newPage,
+    //     ...pages.slice(index + 1)
+    //   ];
+    //
+    //   const preloaded = newPages.filter(p => p.preload);
+    //
+    //   this.setState({
+    //     pages: newPages,
+    //     preloadsDone: preloaded.every(p => p.imageLoaded)
+    //   });
+    // } else {
+    //   throw new Error(`page id not found in pages array: ${id}`);
+    // }
   }
 
   lazyLoadLogic() {
@@ -260,13 +193,13 @@ class Carousel extends Component {
         }
       });
 
-    this.setState({
-      pages
-    });
+    // this.setState({
+    //   pages
+    // });
   }
 
   getCurrentPageProps() {
-    return this.state.pages[this.state.currentSlideIndex];
+    return this.props.pages[this.props.currentPageIndex];
   }
 
   renderCounter() {
