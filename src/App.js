@@ -22,18 +22,21 @@ class App extends Component {
 
     onNextPage: PropTypes.func.isRequired,
     onPreviousPage: PropTypes.func.isRequired,
-    onToggleFullscreen: PropTypes.func.isRequired
+    onToggleControls: PropTypes.func.isRequired,
+    onToggleFullscreen: PropTypes.func.isRequired,
+    onPageLoad: PropTypes.func.isRequired
   };
 
   render() {
     return (
       <Carousel
-        pages={this.props.pages}
-        onNextPage={this.props.onNextPage}
-        onPreviousPage={this.props.onPreviousPage}
         currentPageIndex={this.props.currentPageIndex}
+        pages={this.props.pages}
         isShowingControls={this.props.isShowingControls}
         isFullscreen={this.props.isFullscreen}
+
+        onNextPage={this.props.onNextPage}
+        onPreviousPage={this.props.onPreviousPage}
         onToggleControls={this.props.onToggleControls}
         onToggleFullscreen={this.props.onToggleFullscreen}
         onPageLoad={this.props.onPageLoad}
