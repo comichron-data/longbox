@@ -1,16 +1,12 @@
 /*
 TODO
 
-go to start
-
-toggle reader comments
-add reader comment
-vote reader comment - up/down
-
-toggle creator comments
-
+- go to start
+- toggle reader comments
+- add reader comment
+- vote reader comment - up/down
+- toggle creator comments
 */
-
 
 export const GO_TO_NEXT_PAGE = 'GO_TO_NEXT_PAGE';
 export const GO_TO_PREVIOUS_PAGE = 'GO_TO_PREVIOUS_PAGE';
@@ -21,6 +17,8 @@ export const TOGGLE_CONTROLS = 'TOGGLE_CONTROLS';
 export const TOGGLE_FULLSCREEN = 'TOGGLE_FULLSCREEN';
 // fscreen telling us that its state has changed
 export const CHANGE_FULLSCREEN = 'CHANGE_FULLSCREEN';
+
+
 
 export function toggleFullscreen() {
   return {

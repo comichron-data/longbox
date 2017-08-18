@@ -65,5 +65,4 @@ const mapDispatchToProps = {
   onPageLoad: pageLoaded
 };
 
-
 export default connect(mapStateToProps, mapDispatchToProps)(App);
