@@ -39,10 +39,6 @@ class Carousel extends Component {
     this.handleToggleFullscreen = this.handleToggleFullscreen.bind(this);
   }
 
-  scrollToTop() {
-    ReactDOM.findDOMNode(this).scrollIntoView();
-  }
-
   render() {
     const styles = {
       width: `${(this.props.pages.length * 100)}vw`, // page count * 100vw
@@ -86,11 +82,29 @@ class Carousel extends Component {
   }
 
   handlePrimaryClick() {
-    this.props.onNextPage();
+    const targetIndex = this.props.currentPageIndex + 1;
+
+    if (this.isValidPageIndex(targetIndex)) {
+      this.scrollToTop();
+      this.props.onNextPage();
+    }
   }
 
   handleSecondaryClick() {
-    this.props.onPreviousPage();
+    const targetIndex = this.props.currentPageIndex - 1;
+
+    if (this.isValidPageIndex(targetIndex)) {
+      this.scrollToTop();
+      this.props.onPreviousPage();
+    }
+  }
+
+  isValidPageIndex(index) {
+    return index >= 0 && index < this.props.pages.length;
+  }
+
+  scrollToTop() {
+    ReactDOM.findDOMNode(this).scrollIntoView();
   }
 
   renderControls() {
