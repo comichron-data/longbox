@@ -1,5 +1,20 @@
+/*
+TODO
+
+go to start
+
+toggle reader comments
+add reader comment
+vote reader comment - up/down
+
+toggle creator comments
+
+*/
+
+
 export const GO_TO_NEXT_PAGE = 'GO_TO_NEXT_PAGE';
 export const GO_TO_PREVIOUS_PAGE = 'GO_TO_PREVIOUS_PAGE';
+export const PAGE_LOADED = 'PAGE_LOADED';
 
 export const TOGGLE_CONTROLS = 'TOGGLE_CONTROLS';
 // user using UI to manipulate fscreen
@@ -40,24 +55,11 @@ export function toggleControls() {
   };
 }
 
-
-/*
-
-go to next page
-go to previous page
-go to start
-
-toggle controls
-
-enter full screen
-exit full screen
-
-toggle reader comments
-add reader comment
-vote reader comment - up/down
-
-toggle creator comments
-
-lazy load finished
-
-*/
+export function pageLoaded(id) {
+  return {
+    type: PAGE_LOADED,
+    payload: {
+      id
+    }
+  };
+}

@@ -16,7 +16,7 @@ class Carousel extends Component {
       PropTypes.shape({
         id: PropTypes.string.isRequired,
         url: PropTypes.string,
-        preload: PropTypes.bool,
+        readyToLoad: PropTypes.bool,
         label: PropTypes.string,
       })
     ).isRequired,
@@ -25,12 +25,7 @@ class Carousel extends Component {
     onToggleControls: PropTypes.func.isRequired,
     onToggleFullscreen: PropTypes.func.isRequired,
     onNextPage: PropTypes.func.isRequired,
-    onPreviousPage: PropTypes.func.isRequired,
-    lazyLoadBufferSize: PropTypes.number
-  };
-
-  static defaultProps = {
-    lazyLoadBufferSize: 1
+    onPreviousPage: PropTypes.func.isRequired
   };
 
   constructor(props) {
@@ -42,31 +37,6 @@ class Carousel extends Component {
     this.handleSecondaryClick = this.handleSecondaryClick.bind(this);
     this.handleTertiaryClick = this.handleTertiaryClick.bind(this);
     this.handleToggleFullscreen = this.handleToggleFullscreen.bind(this);
-  }
-
-  // componentDidUpdate(prevProps, prevState) {
-  //   const pageChanged = prevState.currentSlideIndex !== this.state.currentSlideIndex;
-  //   const preloadsJustFinished = !prevState.preloadsDone && this.state.preloadsDone;
-  //
-  //   if (preloadsJustFinished) {
-  //     console.log('all preloads are done');
-  //   }
-  //
-  //   if (pageChanged || preloadsJustFinished) {
-  //     this.lazyLoadLogic();
-  //   }
-  // }
-
-  handleTertiaryClick() {
-    this.props.onToggleControls();
-  }
-
-  handlePrimaryClick() {
-    this.props.onNextPage();
-  }
-
-  handleSecondaryClick() {
-    this.props.onPreviousPage();
   }
 
   scrollToTop() {
@@ -111,6 +81,18 @@ class Carousel extends Component {
     return <Navigation {...props} />;
   }
 
+  handleTertiaryClick() {
+    this.props.onToggleControls();
+  }
+
+  handlePrimaryClick() {
+    this.props.onNextPage();
+  }
+
+  handleSecondaryClick() {
+    this.props.onPreviousPage();
+  }
+
   renderControls() {
     const props = {
       fullscreen: {
@@ -153,53 +135,8 @@ class Carousel extends Component {
       });
   }
 
-  handlePageLoad(id) {
-    console.log(`page ${id} loaded`);
-
-    // const pages = this.state.pages;
-    // const index = pages.findIndex(p => p.id === id);
-    //
-    // if (index !== -1) {
-    //   const newPage = Object.assign({}, pages[index], {imageLoaded: true});
-    //   const newPages = [
-    //     ...pages.slice(0, index),
-    //     newPage,
-    //     ...pages.slice(index + 1)
-    //   ];
-    //
-    //   const preloaded = newPages.filter(p => p.preload);
-    //
-    //   this.setState({
-    //     pages: newPages,
-    //     preloadsDone: preloaded.every(p => p.imageLoaded)
-    //   });
-    // } else {
-    //   throw new Error(`page id not found in pages array: ${id}`);
-    // }
-  }
-
-  lazyLoadLogic() {
-    const start = this.state.currentSlideIndex + 1;
-    const end = start + this.props.lazyLoadBufferSize;
-
-    const pages = this.state.pages
-      .map((page, index) => {
-        if (index >= start && index < end) {
-          return Object.assign({}, page, {
-            readyToLoad: true
-          });
-        } else {
-          return page;
-        }
-      });
-
-    // this.setState({
-    //   pages
-    // });
-  }
-
-  getCurrentPageProps() {
-    return this.props.pages[this.props.currentPageIndex];
+  handlePageLoad(pageId) {
+    this.props.onPageLoad(pageId);
   }
 
   renderCounter() {
@@ -216,6 +153,10 @@ class Carousel extends Component {
         <Counter label={label} />
       </div>
     );
+  }
+
+  getCurrentPageProps() {
+    return this.props.pages[this.props.currentPageIndex];
   }
 }
 

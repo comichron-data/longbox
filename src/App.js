@@ -6,12 +6,12 @@ import {
   goToNextPage,
   goToPreviousPage,
   toggleControls,
-  toggleFullscreen
+  toggleFullscreen,
+  pageLoaded
 } from './actions';
 
 import './App.css';
 import Carousel from './carousel/Carousel'
-
 
 class App extends Component {
   static propTypes = {
@@ -36,7 +36,7 @@ class App extends Component {
         isFullscreen={this.props.isFullscreen}
         onToggleControls={this.props.onToggleControls}
         onToggleFullscreen={this.props.onToggleFullscreen}
-        lazyLoadBufferSize={3}
+        onPageLoad={this.props.onPageLoad}
       />
     );
   }
@@ -58,7 +58,8 @@ const mapDispatchToProps = {
   onNextPage: goToNextPage,
   onPreviousPage: goToPreviousPage,
   onToggleControls: toggleControls,
-  onToggleFullscreen: toggleFullscreen
+  onToggleFullscreen: toggleFullscreen,
+  onPageLoad: pageLoaded
 };
 
 
