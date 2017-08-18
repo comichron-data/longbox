@@ -8,7 +8,7 @@ import {
   toggleControls,
   toggleFullscreen,
   pageLoaded
-} from './actions';
+} from '../actions';
 
 import './App.css';
 import Carousel from './carousel/Carousel'
