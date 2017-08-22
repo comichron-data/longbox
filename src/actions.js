@@ -34,9 +34,10 @@ export const FAILED_ADDING_COMMENT = 'FAILED_ADDING_COMMENT';
 Action creators
 */
 
-export function showAddCommentForm() {
+export function showAddCommentForm(x, y) {
   return {
-    type: SHOW_ADD_COMMENT_FORM
+    type: SHOW_ADD_COMMENT_FORM,
+    payload: {x, y}
   };
 }
 
