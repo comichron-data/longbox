@@ -47,8 +47,11 @@ export function hideAddCommentForm() {
   };
 }
 
-export function addComment({name, text, x, y, pageId}) {
-  return dispatch => {
+export function addComment({name, text, x, y}) {
+  return (dispatch, getState) => {
+    const state = getState();
+    const pageId = state.pages.currentPageId;
+
     dispatch(startedAddingComment({
       name,
       text,
