@@ -54,16 +54,16 @@ store.dispatch(bootstrap({
   pages
 }));
 
-setTimeout(() => store.dispatch(showReaderComments(1)), 2000);
-setTimeout(() => store.dispatch(hideReaderComments(1)), 4000);
+setTimeout(() => store.dispatch(showReaderComments(2)), 2000);
+setTimeout(() => store.dispatch(hideReaderComments(2)), 4000);
 
-setTimeout(() => store.dispatch(addComment({
-  name: 'comic fan bob',
-  text: 'hey everyone!',
-  x: 20,
-  y: 60,
-  pageId: 2
-})), 6000)
+// setTimeout(() => store.dispatch(addComment({
+//   name: 'comic fan bob',
+//   text: 'hey everyone!',
+//   x: 20,
+//   y: 60,
+//   pageId: 2
+// })), 6000)
 
 ReactDOM.render(
   <Provider store={store}>
