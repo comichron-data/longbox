@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {Provider} from 'react-redux';
 
-import {bootstrap} from './actions';
+import {bootstrap, loadReaderComments, hideReaderComments} from './actions';
 import App from './components/App';
 import './index.css';
 
@@ -47,6 +47,9 @@ const store = configureStore();
 store.dispatch(bootstrap({
   pages
 }));
+
+setTimeout(() => store.dispatch(loadReaderComments()), 3000);
+setTimeout(() => store.dispatch(hideReaderComments()), 5000);
 
 ReactDOM.render(
   <Provider store={store}>
