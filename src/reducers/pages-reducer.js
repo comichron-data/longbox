@@ -37,8 +37,9 @@ export default function pagesReducer(state, action) {
           ...state,
           currentPageIndex: targetIndex
         });
+      } else {
+        return state;
       }
-      break;
     }
     case GO_TO_PREVIOUS_PAGE: {
       const targetIndex = state.currentPageIndex - 1;
@@ -47,8 +48,9 @@ export default function pagesReducer(state, action) {
           ...state,
           currentPageIndex: targetIndex
         });
+      } else {
+        return state;
       }
-      break;
     }
     case PAGE_LOADED: {
       const {id} = action.payload;
@@ -74,9 +76,9 @@ export default function pagesReducer(state, action) {
         return newState;
       }
     }
+    default:
+      return state;
   }
-
-  return state;
 }
 
 function lazyLoadLogic(state) {
