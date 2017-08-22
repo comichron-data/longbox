@@ -1,8 +1,9 @@
-import axios from 'axios';
+import request from 'superagent';
 
 export function getComments(pageId) {
   const url = `https://comichron-data.github.io/staticman-comments-test/page-comments/${pageId}.json`;
-  return axios.get(url)
+  return request
+    .get(url)
     .then(response => response.data);
 }
 
@@ -23,5 +24,8 @@ export function addComment({name, text, x, y, pageId}) {
       return wrappedProps;
     }, {})
 
-  return axios.post(url, params);
+  return request
+    .post(url)
+    .type('form')
+    .send(params);
 }
