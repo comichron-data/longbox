@@ -2,7 +2,13 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {Provider} from 'react-redux';
 
-import {bootstrap, showReaderComments, hideReaderComments} from './actions';
+import {
+  bootstrap,
+  showReaderComments,
+  hideReaderComments,
+  addComment
+} from './actions';
+
 import App from './components/App';
 import './index.css';
 
@@ -50,7 +56,14 @@ store.dispatch(bootstrap({
 
 setTimeout(() => store.dispatch(showReaderComments(1)), 2000);
 setTimeout(() => store.dispatch(hideReaderComments(1)), 4000);
-setTimeout(() => store.dispatch(showReaderComments(1)), 6000);
+
+setTimeout(() => store.dispatch(addComment({
+  name: 'comic fan bob',
+  text: 'hey everyone!',
+  x: 20,
+  y: 60,
+  pageId: 2
+})), 6000)
 
 ReactDOM.render(
   <Provider store={store}>
