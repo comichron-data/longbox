@@ -8,6 +8,8 @@ TODO
 - toggle creator comments
 */
 
+export const BOOTSTRAP = 'BOOTSTRAP';
+
 export const GO_TO_NEXT_PAGE = 'GO_TO_NEXT_PAGE';
 export const GO_TO_PREVIOUS_PAGE = 'GO_TO_PREVIOUS_PAGE';
 export const PAGE_LOADED = 'PAGE_LOADED';
@@ -19,6 +21,14 @@ export const TOGGLE_FULLSCREEN = 'TOGGLE_FULLSCREEN';
 export const CHANGE_FULLSCREEN = 'CHANGE_FULLSCREEN';
 
 
+export function bootstrap({pages}) {
+  return {
+    type: BOOTSTRAP,
+    payload: {
+      pages
+    }
+  };
+}
 
 export function toggleFullscreen() {
   return {

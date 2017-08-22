@@ -1,4 +1,5 @@
 import {
+  BOOTSTRAP,
   GO_TO_NEXT_PAGE,
   GO_TO_PREVIOUS_PAGE,
   PAGE_LOADED
@@ -8,54 +9,26 @@ const lazyLoadBufferSize = 2;
 
 export default function pagesReducer(state, action) {
   state = state || {
-    byId: {
-      '1': {
-        id: '1',
-        url: 'http://www.harkavagrant.com/history/wutheringsixsm.png',
-        preload: true,
-        readyToLoad: true,
-        loaded: false,
-        label: 'page 1'
-      },
-      '2': {
-        id: '2',
-        url: 'http://www.harkavagrant.com/history/wutheringsixsm.png',
-        preload: false,
-        readyToLoad: false,
-        loaded: false,
-        label: 'page 2'
-      },
-      '3': {
-        id: '3',
-        url: 'http://www.harkavagrant.com/history/wutheringsixsm.png',
-        preload: false,
-        readyToLoad: false,
-        loaded: false,
-        label: 'page 3'
-      },
-      '4': {
-        id: '4',
-        url: 'http://www.harkavagrant.com/history/wutheringsixsm.png',
-        preload: false,
-        readyToLoad: false,
-        loaded: false,
-        label: 'page 4'
-      },
-      '5': {
-        id: '5',
-        url: 'http://www.harkavagrant.com/history/wutheringsixsm.png',
-        preload: false,
-        readyToLoad: false,
-        loaded: false,
-        label: 'page 5'
-      }
-    },
-    idsInOrder: [1, 2, 3, 4, 5],
     currentPageIndex: 0,
     preloadsDone: false
   };
 
   switch (action.type) {
+    case BOOTSTRAP: {
+      return {
+        ...state,
+        idsInOrder: action.payload.pages.map(p => p.id),
+        byId: action.payload.pages
+          .reduce((byId, page) => {
+            byId[page.id] = {
+              ...page,
+              readyToLoad: page.preload,
+              loaded: false
+            };
+            return byId;
+          }, {})
+      };
+    }
     case GO_TO_NEXT_PAGE: {
       const targetIndex = state.currentPageIndex + 1;
 
