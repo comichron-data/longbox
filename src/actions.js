@@ -24,57 +24,79 @@ export const CHANGE_FULLSCREEN = 'CHANGE_FULLSCREEN';
 export const SHOW_READER_COMMENTS = 'SHOW_READER_COMMENTS';
 export const HIDE_READER_COMMENTS = 'HIDE_READER_COMMENTS';
 
-export const STARTED_LOADING_COMMENTS = 'STARTED_LOADING_COMMENTS';
+export const STARTED_LOADING_READER_COMMENTS = 'STARTED_LOADING_READER_COMMENTS';
 export const FINISHED_LOADING_READER_COMMENTS = 'FINISHED_LOADING_READER_COMMENTS';
-export const FAILED_LOADING_COMMENTS = 'FAILED_LOADING_COMMENTS';
+export const FAILED_LOADING_READER_COMMENTS = 'FAILED_LOADING_READER_COMMENTS';
 
-export function showReaderComments() {
-  return {
-    type: SHOW_READER_COMMENTS
+export function showReaderComments(pageId) {
+  return (dispatch, getState) => {
+    dispatch({
+      type: SHOW_READER_COMMENTS,
+      payload: {
+        pageId
+      }
+    });
+
+    if (needToLoadReaderComments(getState(), pageId)) {
+      dispatch(loadReaderComments(pageId));
+    }
   };
 }
 
-export function loadReaderComments() {
+function needToLoadReaderComments(state, pageId) {
+  return !state.readerComments[pageId].loaded;
+}
+
+export function hideReaderComments(pageId) {
+  return {
+    type: HIDE_READER_COMMENTS,
+    payload: {
+      pageId
+    }
+  };
+}
+
+export function loadReaderComments(pageId) {
   return dispatch => {
-    dispatch(startedLoadingReaderComments());
+    dispatch(startedLoadingReaderComments(pageId));
 
     const url = 'https://comichron-data.github.io/staticman-comments-test/comments.json';
     axios.get(url)
       .then(response => {
-        console.log(response.data)
-        dispatch(finishedLoadingReaderComments(response.data));
+        dispatch(finishedLoadingReaderComments(pageId, response.data));
       })
       .catch(error => {
-        dispatch(failedLoadingReaderComments(error));
+        dispatch(failedLoadingReaderComments(pageId, error));
       });
   };
 }
 
-function startedLoadingReaderComments() {
+function startedLoadingReaderComments(pageId) {
   return {
-    type: STARTED_LOADING_COMMENTS
+    type: STARTED_LOADING_READER_COMMENTS,
+    payload: {
+      pageId
+    }
   };
 }
 
-function finishedLoadingReaderComments(comments) {
+function finishedLoadingReaderComments(pageId, comments) {
   return {
     type: FINISHED_LOADING_READER_COMMENTS,
     payload: {
+      pageId,
       comments
     }
   };
 }
 
-function failedLoadingReaderComments(error) {
+function failedLoadingReaderComments(pageId, error) {
   return {
-    type: FAILED_LOADING_COMMENTS,
-    payload: error
-  };
-}
-
-export function hideReaderComments() {
-  return {
-    type: HIDE_READER_COMMENTS
+    type: FAILED_LOADING_READER_COMMENTS,
+    payload: {
+      pageId,
+      error
+    }
   };
 }
 

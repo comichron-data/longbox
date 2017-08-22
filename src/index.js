@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {Provider} from 'react-redux';
 
-import {bootstrap, loadReaderComments, hideReaderComments} from './actions';
+import {bootstrap, showReaderComments, hideReaderComments} from './actions';
 import App from './components/App';
 import './index.css';
 
@@ -48,8 +48,9 @@ store.dispatch(bootstrap({
   pages
 }));
 
-setTimeout(() => store.dispatch(loadReaderComments()), 3000);
-setTimeout(() => store.dispatch(hideReaderComments()), 5000);
+setTimeout(() => store.dispatch(showReaderComments(1)), 2000);
+setTimeout(() => store.dispatch(hideReaderComments(1)), 4000);
+setTimeout(() => store.dispatch(showReaderComments(1)), 6000);
 
 ReactDOM.render(
   <Provider store={store}>
