@@ -19,7 +19,6 @@ class Page extends Component {
 
   render() {
     const imgProps = {
-      alt: this.props.imageUrl,
       className: 'lb-c-page__image',
       src: this.imageUrl(),
       onLoad: this.handleImageLoad
@@ -28,7 +27,7 @@ class Page extends Component {
     return (
       <div className="lb-c-page">
         <div className="lb-c-page__comment-wraper">
-          <img {...imgProps} />
+          <img {...imgProps} alt={`Comic Page: ${this.props.imageUrl}`}/>
           <CommentBubble x={10} y={10}>
             <Comment name="Cameron Leslie" commentText="Your mother..." date="somedate"/>
           </CommentBubble>
