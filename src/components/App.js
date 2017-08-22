@@ -52,11 +52,6 @@ function mapStateToProps(state) {
   const {currentPageId} = state.pages;
   const currentPageIndex = state.pages.idsInOrder.indexOf(currentPageId);
 
-  console.log('idsInOrder', state.pages.idsInOrder)
-
-  console.log('currentPageId', currentPageId)
-  console.log('currentPageIndex', currentPageIndex)
-
   return {
     pages,
     currentPageIndex,
