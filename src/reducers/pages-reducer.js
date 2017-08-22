@@ -9,7 +9,6 @@ const lazyLoadBufferSize = 2;
 
 export default function pagesReducer(state, action) {
   state = state || {
-    currentPageIndex: 0,
     preloadsDone: false
   };
 
@@ -17,6 +16,7 @@ export default function pagesReducer(state, action) {
     case BOOTSTRAP: {
       return {
         ...state,
+        currentPageId: action.payload.pages[0].id,
         idsInOrder: action.payload.pages.map(p => p.id),
         byId: action.payload.pages
           .reduce((byId, page) => {
@@ -30,23 +30,24 @@ export default function pagesReducer(state, action) {
       };
     }
     case GO_TO_NEXT_PAGE: {
-      const targetIndex = state.currentPageIndex + 1;
+      const nextId = findNextId(state.idsInOrder, state.currentPageId);
 
-      if (targetIndex < state.idsInOrder.length) {
+      if (nextId !== state.currentPageId) {
         return lazyLoadLogic({
           ...state,
-          currentPageIndex: targetIndex
+          currentPageId: nextId
         });
       } else {
         return state;
       }
     }
     case GO_TO_PREVIOUS_PAGE: {
-      const targetIndex = state.currentPageIndex - 1;
-      if (targetIndex >= 0) {
+      const prevId = findPreviousId(state.idsInOrder, state.currentPageId);
+
+      if (prevId !== state.currentPageId) {
         return lazyLoadLogic({
           ...state,
-          currentPageIndex: targetIndex
+          currentPageId: prevId
         });
       } else {
         return state;
@@ -81,9 +82,29 @@ export default function pagesReducer(state, action) {
   }
 }
 
+function findNextId(ids, currentId) {
+  const index = ids.indexOf(currentId);
+
+  if (index < ids.length - 1) {
+    return ids[index + 1];
+  } else {
+    return currentId;
+  }
+}
+
+function findPreviousId(ids, currentId) {
+  const index = ids.indexOf(currentId);
+
+  if (index > 0) {
+    return ids[index - 1];
+  } else {
+    return currentId;
+  }
+}
+
 function lazyLoadLogic(state) {
   const pages = getPages(state);
-  const {currentPageIndex} = state;
+  const currentPageIndex = state.idsInOrder.indexOf(state.currentPageId);
 
   const start = currentPageIndex + 1;
   const end = start + lazyLoadBufferSize;
