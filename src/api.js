@@ -12,7 +12,7 @@ export function addComment({name, text, x, y, pageId}) {
 
   const comment = {
     name,
-    message: text,
+    text,
     x,
     y,
     pageId
