@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import './Page.css';
 
+
+import CommentBubble from '../comment-bubble/CommentBubble';
+import Comment from '../comment/Comment';
 // import Spinner from '../spinner/Spinner';
 
 // from http://probablyprogramming.com/2009/03/15/the-tiniest-gif-ever
@@ -24,7 +27,18 @@ class Page extends Component {
 
     return (
       <div className="lb-c-page">
-        <img {...imgProps} />
+        <div className="lb-c-page__comment-wraper">
+          <img {...imgProps} />
+          <CommentBubble x={10} y={10}>
+            <Comment name="Cameron Leslie" commentText="Your mother..." date="somedate"/>
+          </CommentBubble>
+          <CommentBubble x={23} y={90}>
+            <Comment name="Cameron Leslie" commentText="Your mother..." date="somedate"/>
+          </CommentBubble>
+          <CommentBubble x={2} y={30}>
+            <Comment name="Cameron Leslie" commentText="Your mother..." date="somedate"/>
+          </CommentBubble>
+        </div>
       </div>
     );
   }

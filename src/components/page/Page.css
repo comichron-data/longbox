@@ -11,3 +11,7 @@
 .lb-c-page__image {
   max-width: 100%;
 }
+
+.lb-c-page__comment-wraper {
+  position: relative;
+}
