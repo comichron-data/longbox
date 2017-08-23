@@ -103,14 +103,14 @@ export function showReaderComments(pageId) {
       }
     });
 
-    if (needToLoadReaderComments(getState(), pageId)) {
+    if (!hasLoadedReaderComments(getState(), pageId)) {
       dispatch(loadReaderComments(pageId));
     }
   };
 }
 
-function needToLoadReaderComments(state, pageId) {
-  return !state.readerComments[pageId].loaded;
+function hasLoadedReaderComments(state, pageId) {
+  return state.readerComments.byPageId[pageId].loaded;
 }
 
 export function hideReaderComments(pageId) {

@@ -1,3 +1,4 @@
+import {combineReducers} from 'redux';
 import {
   BOOTSTRAP,
   SHOW_READER_COMMENTS,
@@ -7,15 +8,28 @@ import {
   FAILED_LOADING_READER_COMMENTS
 } from '../actions';
 
-export default function commentsReducer(state, action) {
-  state = state || {};
+export default combineReducers({
+  visible: visibleReducer,
+  byPageId: byPageIdReducer
+});
 
+function visibleReducer(state = false, action) {
   switch (action.type) {
-    case BOOTSTRAP: {
+    case SHOW_READER_COMMENTS:
+      return true;
+    case HIDE_READER_COMMENTS:
+      return false;
+    default:
+      return state;
+  }
+}
+
+function byPageIdReducer(state = {}, action) {
+  switch (action.type) {
+    case BOOTSTRAP:
       return action.payload.pages
         .reduce((byPageId, page) => {
           byPageId[page.id] = {
-            visible: false,
             loading: false,
             loaded: false,
             comments: [],
@@ -23,35 +37,21 @@ export default function commentsReducer(state, action) {
           };
           return byPageId;
         }, {});
-    }
-    case SHOW_READER_COMMENTS: {
-      return changePage(state, action.payload.pageId, {
-        visible: true
-      });
-    }
-    case HIDE_READER_COMMENTS: {
-      return changePage(state, action.payload.pageId, {
-        visible: false
-      });
-    }
-    case STARTED_LOADING_READER_COMMENTS: {
+    case STARTED_LOADING_READER_COMMENTS:
       return changePage(state, action.payload.pageId, {
         loading: true
       });
-    }
-    case FINISHED_LOADING_READER_COMMENTS: {
+    case FINISHED_LOADING_READER_COMMENTS:
       return changePage(state, action.payload.pageId, {
         loading: false,
         loaded: true,
         comments: action.payload.comments
       });
-    }
-    case FAILED_LOADING_READER_COMMENTS: {
+    case FAILED_LOADING_READER_COMMENTS:
       return changePage(state, action.payload.pageId, {
         loading: false,
         loaded: false
       });
-    }
     default:
       return state;
   }
