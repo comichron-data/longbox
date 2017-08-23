@@ -11,6 +11,24 @@
   border: 0;
 }
 
+.lb-c-controls__button--animate-in {
+  animation-name: animate-in;
+  animation-duration: .2s;
+  animation-timing-function: ease-out;
+  animation-iteration-count: 1;
+}
+
+@keyframes animate-in {
+  0% {
+    opacity: 0;
+    transform: scale(0);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
 .lb-c-controls__button + .lb-c-controls__button {
   margin-left: 1em;
 }

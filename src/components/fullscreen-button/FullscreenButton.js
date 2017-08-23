@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import './FullscreenButton.css';
 
 class FullscreenButton extends Component {
   constructor(props) {
