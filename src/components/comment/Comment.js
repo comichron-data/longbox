@@ -6,9 +6,9 @@ class Comment extends Component {
   render() {
     return (
       <div className="lb-c-comment">
-        <strong>{this.props.name}</strong>
-        <p>{this.props.commentText}</p>
-        <small>{this.props.date}</small>
+        <strong  className="lb-c-comment__name">{this.props.name}</strong>
+        <div className="lb-c-comment__body">{this.props.body}</div>
+        <div className="lb-c-comment__date">{this.props.date}</div>
       </div>
     );
   }
@@ -16,7 +16,7 @@ class Comment extends Component {
 
 Comment.propTypes = {
   name: PropTypes.string.isRequired,
-  commentText: PropTypes.string.isRequired,
+  body: PropTypes.string.isRequired,
   data: PropTypes.string.isRequired
 }
 

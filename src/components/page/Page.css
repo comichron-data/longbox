@@ -5,11 +5,11 @@
   background-size: contain;
   display: flex;
   justify-content: center;
-  /*min-height: 100vh;*/
 }
 
 .lb-c-page__image {
   max-width: 100%;
+  vertical-align: bottom;
 }
 
 .lb-c-page__comment-wraper {

@@ -29,13 +29,13 @@ class Page extends Component {
         <div className="lb-c-page__comment-wraper">
           <img {...imgProps} alt={`Comic Page: ${this.props.imageUrl}`}/>
           <CommentBubble x={10} y={10}>
-            <Comment name="Cameron Leslie" commentText="Your mother..." date="somedate"/>
+            <Comment name="Cameron Leslie" body="Your mother..." date="somedate"/>
           </CommentBubble>
           <CommentBubble x={23} y={90}>
-            <Comment name="Cameron Leslie" commentText="Your mother..." date="somedate"/>
+            <Comment name="Cameron Leslie" body="Your mother..." date="somedate"/>
           </CommentBubble>
           <CommentBubble x={2} y={30}>
-            <Comment name="Cameron Leslie" commentText="Your mother..." date="somedate"/>
+            <Comment name="Cameron Leslie" body="Your mother..." date="somedate"/>
           </CommentBubble>
         </div>
       </div>
