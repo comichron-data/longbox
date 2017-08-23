@@ -1,2 +1,15 @@
 .lb-c-comment {
+  
+}
+.lb-c-comment > * + * {
+  margin-top: .5em;
+}
+.lb-c-comment__name {
+}
+.lb-c-comment__body {
+}
+.lb-c-comment__date {
+  opacity: .5;
+  font-size: 75%;
+  text-align: right;
 }
