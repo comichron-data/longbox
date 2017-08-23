@@ -2,11 +2,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import './Page.css';
 
-
-import CommentBubble from '../comment-bubble/CommentBubble';
-import Comment from '../comment/Comment';
-// import Spinner from '../spinner/Spinner';
-
 // from http://probablyprogramming.com/2009/03/15/the-tiniest-gif-ever
 const spacerGif = 'data:image/gif;base64,R0lGODlhAQABAIABAP///wAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==';
 
@@ -26,18 +21,7 @@ class Page extends Component {
 
     return (
       <div className="lb-c-page">
-        <div className="lb-c-page__comment-wraper">
-          <img {...imgProps} alt={`Comic Page: ${this.props.imageUrl}`}/>
-          <CommentBubble x={10} y={10}>
-            <Comment name="Cameron Leslie" body="Your mother..." date="somedate"/>
-          </CommentBubble>
-          <CommentBubble x={23} y={90}>
-            <Comment name="Cameron Leslie" body="Your mother..." date="somedate"/>
-          </CommentBubble>
-          <CommentBubble x={2} y={30}>
-            <Comment name="Cameron Leslie" body="Your mother..." date="somedate"/>
-          </CommentBubble>
-        </div>
+        <img {...imgProps} alt={`Comic Page: ${this.props.imageUrl}`}/>
       </div>
     );
   }
