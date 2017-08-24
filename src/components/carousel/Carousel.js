@@ -112,7 +112,9 @@ class Carousel extends Component {
       fullscreen: {
         isFullscreen: this.props.isFullscreen,
         onClick: this.handleToggleFullscreen
-      }
+      },
+      shareUrl: this.props.shareUrl,
+      tweet: this.props.tweet
     };
 
     const classes = [

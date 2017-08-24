@@ -10,7 +10,7 @@ class Controls extends Component {
     return (
       <div className="lb-c-controls">
         <FullscreenButton {...this.props.fullscreen} />
-        <ShareButton url="example.org" tweet="test tweet" />
+        <ShareButton shareUrl={this.props.shareUrl} tweet={this.props.tweet} />
       </div>
     );
   }
@@ -21,7 +21,9 @@ Controls.propTypes = {
     // are we currently in fullscreen mode
     isFullscreen: PropTypes.bool.isRequired,
     onClick: PropTypes.func.isRequired
-  })
+  }),
+  shareUrl: PropTypes.string.isRequired,
+  tweet: PropTypes.string.isRequired
 }
 
 export default Controls;

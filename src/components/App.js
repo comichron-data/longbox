@@ -34,6 +34,8 @@ class App extends Component {
         pages={this.props.pages}
         isShowingControls={this.props.isShowingControls}
         isFullscreen={this.props.isFullscreen}
+        shareUrl={this.props.shareUrl}
+        tweet={this.props.tweet}
 
         onNextPage={this.props.onNextPage}
         onPreviousPage={this.props.onPreviousPage}
@@ -55,6 +57,8 @@ function mapStateToProps(state) {
   return {
     pages,
     currentPageIndex,
+    tweet: state.controls.tweet,
+    shareUrl: state.controls.shareUrl,
     isShowingControls: state.controls.visible,
     isFullscreen: state.controls.isFullscreen
   }

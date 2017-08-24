@@ -46,7 +46,9 @@ const pages = [
 
 const store = configureStore();
 store.dispatch(bootstrap({
-  pages
+  pages,
+  shareUrl: 'http://example.org',
+  tweet: 'check out http://example.org'
 }));
 
 ReactDOM.render(

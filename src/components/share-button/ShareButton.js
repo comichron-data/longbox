@@ -7,7 +7,7 @@ import Button from '../controls/Button';
 class ShareButton extends Component {
   static propTypes = {
     tweet: PropTypes.string.isRequired,
-    url: PropTypes.string.isRequired
+    shareUrl: PropTypes.string.isRequired
   };
 
   constructor(props) {
@@ -36,10 +36,10 @@ class ShareButton extends Component {
   renderSocialMediaButtons() {
     if (this.state.open) {
       return [
-        <Button onClick={this.handleFacebookClick} animateIn={true}>
+        <Button key="facebook" onClick={this.handleFacebookClick} animateIn={true}>
           <Icon type="facebook" />
         </Button>,
-        <Button onClick={this.handleTwitterClick} animateIn={true}>
+        <Button key="twitter" onClick={this.handleTwitterClick} animateIn={true}>
           <Icon type="twitter" />
         </Button>
       ];
@@ -55,8 +55,8 @@ class ShareButton extends Component {
   }
 
   handleFacebookClick() {
-    const url = encodeURIComponent(this.props.url);
-    const shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${url}`;
+    const escaped = encodeURIComponent(this.props.shareUrl);
+    const shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${escaped}`;
 
     window.open(shareUrl);
   }

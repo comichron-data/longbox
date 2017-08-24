@@ -19,11 +19,13 @@ export const CHANGE_FULLSCREEN = 'CHANGE_FULLSCREEN';
 Action creators
 */
 
-export function bootstrap({pages}) {
+export function bootstrap({pages, tweet, shareUrl}) {
   return {
     type: BOOTSTRAP,
     payload: {
-      pages
+      pages,
+      tweet,
+      shareUrl
     }
   };
 }
