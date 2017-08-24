@@ -10,7 +10,7 @@ class Controls extends Component {
     return (
       <div className="lb-c-controls">
         <FullscreenButton {...this.props.fullscreen} />
-        <ShareButton />
+        <ShareButton url="example.org" tweet="test tweet" />
       </div>
     );
   }

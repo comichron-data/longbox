@@ -6,7 +6,8 @@ import {
 export default function controlsReducer(state, action) {
   state = state || {
     visible: false,
-    isFullscreen: false
+    isFullscreen: false,
+    sharing: false
   };
 
   switch (action.type) {
