@@ -16,6 +16,25 @@
   width: 100vw;
 }
 
+.lb-c-carousel__spinner {
+  opacity: 0;
+  position: fixed;
+  height: 100vh;
+  width: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  transition: opacity .2s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.lb-c-carousel__spinner--isVisible {
+  opacity: 1
+}
+
 .lb-c-carousel__ui {
   position: fixed;
   height: 100%;

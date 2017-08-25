@@ -8,6 +8,7 @@ import Page from '../page/Page';
 import Counter from '../counter/Counter';
 import Controls from '../controls/Controls';
 import Navigation from '../navigation/Navigation';
+import Spinner from '../spinner/Spinner';
 
 class Carousel extends Component {
   static propTypes = {
@@ -52,7 +53,10 @@ class Carousel extends Component {
           <div className="lb-c-carousel__slide" style={styles}>
             {this.renderPages()}
           </div>
-
+          // loader
+          <div className="lb-c-carousel__spinner lb-c-carousel__spinner--isVisible">
+            <Spinner/>
+          </div>
           <div className="lb-c-carousel__ui">
 
             {this.renderNavigation()}
