@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import Swipeable from 'react-swipeable';
 
 import NavigationButton from './NavigationButton';
 import './Navigation.css';
@@ -22,16 +23,30 @@ class Navigation extends Component {
     this.handlePrimaryClick = this.handlePrimaryClick.bind(this);
     this.handleSecondaryClick = this.handleSecondaryClick.bind(this);
     this.handleTertiaryClick = this.handleTertiaryClick.bind(this);
+
+    this.handleSwipingLeft = this.handleSwipingLeft.bind(this);
   }
 
   render() {
     return (
-      <div className="lb-c-navigation">
+      <Swipeable onSwiping={this.handleSwipingLeft} innerRef={this.processReactSwipeableDiv}>
         {this.renderLeft()}
         {this.renderCenter()}
         {this.renderRight()}
-      </div>
+      </Swipeable>
     );
+  }
+
+  processReactSwipeableDiv(element) {
+    if (element != null) {
+      element.classList.add('lb-c-navigation');
+    }
+  }
+
+  handleSwipingLeft() {
+    this.setState({
+      delta: 1
+    })
   }
 
   renderLeft() {
