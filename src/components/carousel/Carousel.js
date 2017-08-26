@@ -10,6 +10,8 @@ import Controls from '../controls/Controls';
 import Navigation from '../navigation/Navigation';
 import Spinner from '../spinner/Spinner';
 
+const clientWidth = () => document.documentElement.clientWidth;
+
 class Carousel extends Component {
   static propTypes = {
     currentPageIndex: PropTypes.number.isRequired,
@@ -34,6 +36,7 @@ class Carousel extends Component {
 
     this.state = {
       userPushPx: 0,
+      viewportWidthPx: clientWidth(),
       swiping: false
     };
 
@@ -46,6 +49,23 @@ class Carousel extends Component {
 
     this.handleSwiping = this.handleSwiping.bind(this);
     this.handleSwiped = this.handleSwiped.bind(this);
+    this.handleResize = this.handleResize.bind(this);
+  }
+
+  componentDidMount() {
+    window.addEventListener('orientationchange', this.handleResize);
+    window.addEventListener('resize', this.handleResize);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('orientationchange', this.handleResize);
+    window.removeEventListener('resize', this.handleResize);
+  }
+
+  handleResize() {
+    this.setState({
+      viewportWidthPx: clientWidth()
+    });
   }
 
   render() {
