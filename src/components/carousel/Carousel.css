@@ -12,6 +12,10 @@
   transition: transform .3s cubic-bezier(0.65, 0.05, 0.36, 1);
 }
 
+.lb-c-carousel__slide--swiping {
+  transition: none;
+}
+
 .lb-c-carousel__item {
   width: 100vw;
 }

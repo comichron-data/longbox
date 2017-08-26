@@ -32,25 +32,34 @@ class Carousel extends Component {
   constructor(props) {
     super(props);
 
+    this.state = {
+      delta: 0,
+      swiping: false
+    };
+
     // pre-bind event handlers
     this.handlePageLoad = this.handlePageLoad.bind(this);
     this.handlePrimaryClick = this.handlePrimaryClick.bind(this);
     this.handleSecondaryClick = this.handleSecondaryClick.bind(this);
     this.handleTertiaryClick = this.handleTertiaryClick.bind(this);
     this.handleToggleFullscreen = this.handleToggleFullscreen.bind(this);
+
+    this.handleSwiping = this.handleSwiping.bind(this);
+    this.handleSwiped = this.handleSwiped.bind(this);
   }
 
   render() {
+    const xSlide = -(this.props.currentPageIndex * 100) - this.state.delta;
     const styles = {
       width: `${(this.props.pages.length * 100)}vw`, // page count * 100vw
-      transform: `translateX(-${this.props.currentPageIndex * 100}vw)` // {-(page number index) * 100vw}
+      transform: `translateX(${xSlide}vw)` // {-(page number index) * 100vw}
     }
 
     return (
       <div id="carousel">
         <div className="lb-c-carousel">
 
-          <div className="lb-c-carousel__slide" style={styles}>
+          <div className={this.sliderClasses()} style={styles}>
             {this.renderPages()}
           </div>
           <div className="lb-c-carousel__spinner lb-c-carousel__spinner--isVisible">
@@ -69,15 +78,54 @@ class Carousel extends Component {
     );
   }
 
+  sliderClasses() {
+    const classes = [
+      'lb-c-carousel__slide'
+    ];
+
+    if (this.state.swiping) {
+      classes.push('lb-c-carousel__slide--swiping');
+    }
+
+    return classes.join(' ');
+  }
+
   renderNavigation() {
     const props = {
       buttonCount: 3,
       onPrimaryClick: this.handlePrimaryClick,
       onSecondaryClick: this.handleSecondaryClick,
-      onTertiaryClick: this.handleTertiaryClick
+      onTertiaryClick: this.handleTertiaryClick,
+      onSwiping: this.handleSwiping,
+      onSwiped: this.handleSwiped
     };
 
     return <Navigation {...props} />;
+  }
+
+  handleSwiping(deltaX) {
+    this.setState({
+      delta: deltaX,
+      swiping: true
+    });
+  }
+
+  handleSwiped(deltaX) {
+    const threshold = 50;
+    if (deltaX < -threshold) {
+      // prev page turn
+      this.handleSecondaryClick();
+    } else if (deltaX > threshold) {
+      // next page turn
+      this.handlePrimaryClick();
+    } else {
+      // no page turn
+    }
+
+    this.setState({
+      delta: 0,
+      swiping: false
+    });
   }
 
   handleTertiaryClick() {

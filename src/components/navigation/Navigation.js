@@ -10,7 +10,9 @@ class Navigation extends Component {
     buttonCount: PropTypes.oneOf([1, 2, 3]),
     onPrimaryClick: PropTypes.func.isRequired,
     onSecondaryClick: PropTypes.func,
-    onTertiaryClick: PropTypes.func
+    onTertiaryClick: PropTypes.func,
+    onSwiping: PropTypes.func.isRequired,
+    onSwiped: PropTypes.func.isRequired
   };
 
   static defaultProps = {
@@ -24,12 +26,17 @@ class Navigation extends Component {
     this.handleSecondaryClick = this.handleSecondaryClick.bind(this);
     this.handleTertiaryClick = this.handleTertiaryClick.bind(this);
 
-    this.handleSwipingLeft = this.handleSwipingLeft.bind(this);
+    this.handleSwiping = this.handleSwiping.bind(this);
+    this.handleSwiped = this.handleSwiped.bind(this);
   }
 
   render() {
     return (
-      <Swipeable onSwiping={this.handleSwipingLeft} innerRef={this.processReactSwipeableDiv}>
+      <Swipeable
+        onSwiping={this.handleSwiping}
+        onSwiped={this.handleSwiped}
+        innerRef={this.processReactSwipeableDiv}
+      >
         {this.renderLeft()}
         {this.renderCenter()}
         {this.renderRight()}
@@ -43,10 +50,12 @@ class Navigation extends Component {
     }
   }
 
-  handleSwipingLeft() {
-    this.setState({
-      delta: 1
-    })
+  handleSwiping(event, deltaX) {
+    this.props.onSwiping(deltaX);
+  }
+
+  handleSwiped(event, deltaX) {
+    this.props.onSwiped(deltaX);
   }
 
   renderLeft() {
