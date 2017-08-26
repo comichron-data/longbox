@@ -51,11 +51,15 @@ class Navigation extends Component {
   }
 
   handleSwiping(event, deltaX) {
-    this.props.onSwiping(deltaX);
+    console.log('swiping, deltaX:', deltaX)
+
+    this.props.onSwiping(-deltaX * 0.25);
   }
 
   handleSwiped(event, deltaX) {
-    this.props.onSwiped(deltaX);
+    console.log('swiped, deltaX:', deltaX)
+
+    this.props.onSwiped(-deltaX * 0.25);
   }
 
   renderLeft() {
