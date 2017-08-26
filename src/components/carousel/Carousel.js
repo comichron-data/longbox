@@ -26,9 +26,7 @@ class Carousel extends Component {
     // how far user has to swipe to cause page turn, in px
     pageTurnThreshold: PropTypes.number,
     isShowingControls: PropTypes.bool.isRequired,
-    isFullscreen: PropTypes.bool.isRequired,
     onToggleControls: PropTypes.func.isRequired,
-    onToggleFullscreen: PropTypes.func.isRequired,
     onNextPage: PropTypes.func.isRequired,
     onPreviousPage: PropTypes.func.isRequired
   };
@@ -51,7 +49,6 @@ class Carousel extends Component {
     this.handlePrimaryClick = this.handlePrimaryClick.bind(this);
     this.handleSecondaryClick = this.handleSecondaryClick.bind(this);
     this.handleTertiaryClick = this.handleTertiaryClick.bind(this);
-    this.handleToggleFullscreen = this.handleToggleFullscreen.bind(this);
 
     this.handleSwiping = this.handleSwiping.bind(this);
     this.handleSwiped = this.handleSwiped.bind(this);
@@ -205,15 +202,6 @@ class Carousel extends Component {
   }
 
   renderControls() {
-    const props = {
-      fullscreen: {
-        isFullscreen: this.props.isFullscreen,
-        onClick: this.handleToggleFullscreen
-      },
-      shareUrl: this.props.shareUrl,
-      tweet: this.props.tweet
-    };
-
     const classes = [
       'lb-js-carousel__ui',
       'lb-c-carousel__toolbar',
@@ -223,13 +211,9 @@ class Carousel extends Component {
 
     return (
       <div className={classes}>
-        <Controls {...props} />
+        <Controls />
       </div>
     );
-  }
-
-  handleToggleFullscreen() {
-    this.props.onToggleFullscreen();
   }
 
   renderPages() {

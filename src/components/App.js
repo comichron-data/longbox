@@ -18,12 +18,10 @@ class App extends Component {
     currentPageIndex: PropTypes.number.isRequired,
     pages: PropTypes.array.isRequired,
     isShowingControls: PropTypes.bool.isRequired,
-    isFullscreen: PropTypes.bool.isRequired,
 
     onNextPage: PropTypes.func.isRequired,
     onPreviousPage: PropTypes.func.isRequired,
     onToggleControls: PropTypes.func.isRequired,
-    onToggleFullscreen: PropTypes.func.isRequired,
     onPageLoad: PropTypes.func.isRequired
   };
 
@@ -33,14 +31,10 @@ class App extends Component {
         currentPageIndex={this.props.currentPageIndex}
         pages={this.props.pages}
         isShowingControls={this.props.isShowingControls}
-        isFullscreen={this.props.isFullscreen}
-        shareUrl={this.props.shareUrl}
-        tweet={this.props.tweet}
 
         onNextPage={this.props.onNextPage}
         onPreviousPage={this.props.onPreviousPage}
         onToggleControls={this.props.onToggleControls}
-        onToggleFullscreen={this.props.onToggleFullscreen}
         onPageLoad={this.props.onPageLoad}
       />
     );
@@ -57,10 +51,7 @@ function mapStateToProps(state) {
   return {
     pages,
     currentPageIndex,
-    tweet: state.controls.tweet,
-    shareUrl: state.controls.shareUrl,
-    isShowingControls: state.controls.visible,
-    isFullscreen: state.controls.isFullscreen
+    isShowingControls: state.controls.visible
   }
 }
 
@@ -68,7 +59,6 @@ const mapDispatchToProps = {
   onNextPage: goToNextPage,
   onPreviousPage: goToPreviousPage,
   onToggleControls: toggleControls,
-  onToggleFullscreen: toggleFullscreen,
   onPageLoad: pageLoaded
 };
 
