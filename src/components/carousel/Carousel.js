@@ -49,7 +49,7 @@ class Carousel extends Component {
   }
 
   render() {
-    const xSlide = -(this.props.currentPageIndex * 100) - this.state.delta;
+    const xSlide = -(this.props.currentPageIndex * 100) + this.state.delta;
     const styles = {
       width: `${(this.props.pages.length * 100)}vw`, // page count * 100vw
       transform: `translateX(${xSlide}vw)` // {-(page number index) * 100vw}
@@ -113,11 +113,11 @@ class Carousel extends Component {
   handleSwiped(deltaX) {
     const threshold = 50;
     if (deltaX < -threshold) {
-      // prev page turn
-      this.handleSecondaryClick();
-    } else if (deltaX > threshold) {
       // next page turn
       this.handlePrimaryClick();
+    } else if (deltaX > threshold) {
+      // prev page turn
+      this.handleSecondaryClick();
     } else {
       // no page turn
     }
