@@ -23,12 +23,18 @@ class Carousel extends Component {
         label: PropTypes.string,
       })
     ).isRequired,
+    // how far user has to swipe to cause page turn, in px
+    pageTurnThreshold: PropTypes.number,
     isShowingControls: PropTypes.bool.isRequired,
     isFullscreen: PropTypes.bool.isRequired,
     onToggleControls: PropTypes.func.isRequired,
     onToggleFullscreen: PropTypes.func.isRequired,
     onNextPage: PropTypes.func.isRequired,
     onPreviousPage: PropTypes.func.isRequired
+  };
+
+  static defaultProps = {
+    pageTurnThreshold: 50
   };
 
   constructor(props) {
@@ -154,15 +160,12 @@ class Carousel extends Component {
   }
 
   handleSwiped(deltaX) {
-    const threshold = 50;
-    if (deltaX < -threshold) {
+    if (deltaX < -this.props.pageTurnThreshold) {
       // next page turn
       this.handlePrimaryClick();
-    } else if (deltaX > threshold) {
+    } else if (deltaX > this.props.pageTurnThreshold) {
       // prev page turn
       this.handleSecondaryClick();
-    } else {
-      // no page turn
     }
 
     this.setState({
