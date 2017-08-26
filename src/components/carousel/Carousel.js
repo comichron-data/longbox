@@ -49,10 +49,9 @@ class Carousel extends Component {
   }
 
   render() {
-    const xSlide = -(this.props.currentPageIndex * 100) + this.state.delta;
     const styles = {
-      width: `${(this.props.pages.length * 100)}vw`, // page count * 100vw
-      transform: `translateX(${xSlide}vw)` // {-(page number index) * 100vw}
+      width: this.totalWidth(),
+      transform: `translateX(${this.totalXOffset()})`
     }
 
     return (
@@ -76,6 +75,30 @@ class Carousel extends Component {
         </div>
       </div>
     );
+  }
+
+  /**
+  * @return {String} css unit
+  */
+  totalXOffset() {
+    const currentPageOffset = -this.props.currentPageIndex * 100;
+    const userPushOffset = this.pxToVw(this.state.delta);
+
+    return `${currentPageOffset + userPushOffset}vw`;
+  }
+
+  pxToVw(px) {
+    const width = document.documentElement.clientWidth;
+    const pixelsPerVw = width / 100;
+    const vw = px / pixelsPerVw;
+    return vw;
+  }
+
+  /**
+  * @return {String} css unit
+  */
+  totalWidth() {
+    return `${this.props.pages.length * 100}vw`;
   }
 
   sliderClasses() {
