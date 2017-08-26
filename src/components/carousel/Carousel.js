@@ -33,7 +33,7 @@ class Carousel extends Component {
     super(props);
 
     this.state = {
-      delta: 0,
+      userPushPx: 0,
       swiping: false
     };
 
@@ -82,7 +82,7 @@ class Carousel extends Component {
   */
   totalXOffset() {
     const currentPageOffset = -this.props.currentPageIndex * 100;
-    const userPushOffset = this.pxToVw(this.state.delta);
+    const userPushOffset = this.pxToVw(this.state.userPushPx);
 
     return `${currentPageOffset + userPushOffset}vw`;
   }
@@ -128,7 +128,7 @@ class Carousel extends Component {
 
   handleSwiping(deltaX) {
     this.setState({
-      delta: deltaX,
+      userPushPx: deltaX,
       swiping: true
     });
   }
@@ -146,7 +146,7 @@ class Carousel extends Component {
     }
 
     this.setState({
-      delta: 0,
+      userPushPx: 0,
       swiping: false
     });
   }
