@@ -3,7 +3,7 @@
   width: 3em;
   border-radius: 200px;
   background-image: linear-gradient(to bottom, black 50%, black 50%, white 50%);
-  animation: rotate 1s linear infinite;
+  animation: rotate .8s linear infinite;
   border: .5em solid rgba(0, 0, 0, 1);
 }
 

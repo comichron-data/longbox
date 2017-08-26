@@ -9,8 +9,11 @@
 .lb-c-controls__button {
   background-color: transparent;
   border: 0;
+  color: white;
 }
-
+.lb-c-controls__button__text {
+  display: inline-block;
+}
 .lb-c-controls__button--animate-in {
   animation-name: animate-in;
   animation-duration: .2s;

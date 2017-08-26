@@ -53,7 +53,6 @@ class Carousel extends Component {
           <div className="lb-c-carousel__slide" style={styles}>
             {this.renderPages()}
           </div>
-          // loader
           <div className="lb-c-carousel__spinner lb-c-carousel__spinner--isVisible">
             <Spinner/>
           </div>
