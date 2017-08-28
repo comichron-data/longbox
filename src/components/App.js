@@ -6,7 +6,6 @@ import {
   goToNextPage,
   goToPreviousPage,
   toggleControls,
-  toggleFullscreen,
   pageLoaded
 } from '../actions';
 
