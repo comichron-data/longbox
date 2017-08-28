@@ -5,6 +5,7 @@ class Button extends Component {
   static propTypes = {
     onClick: PropTypes.func.isRequired,
     label: PropTypes.string.isRequired,
+    tabIndex: PropTypes.number.isRequired,
     animateIn: PropTypes.bool
   }
 
@@ -20,7 +21,12 @@ class Button extends Component {
 
   render() {
     return (
-      <button className={this.className()} onClick={this.handleClick} aria-label={this.props.label}>
+      <button
+        className={this.className()}
+        onClick={this.handleClick}
+        aria-label={this.props.label}
+        tabIndex={this.props.tabIndex}
+      >
         {this.props.children}
       </button>
     );

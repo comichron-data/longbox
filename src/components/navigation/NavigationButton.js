@@ -11,6 +11,7 @@ export default function NavigationButton(props) {
       onClick={props.onClick}
       role="button"
       aria-label={props.label}
+      tabIndex={props.tabIndex}
     />
   );
 }
