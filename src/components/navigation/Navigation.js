@@ -7,16 +7,11 @@ import './Navigation.css';
 
 class Navigation extends Component {
   static propTypes = {
-    buttonCount: PropTypes.oneOf([1, 2, 3]),
     onPrimaryClick: PropTypes.func.isRequired,
-    onSecondaryClick: PropTypes.func,
-    onTertiaryClick: PropTypes.func,
+    onSecondaryClick: PropTypes.func.isRequired,
+    onTertiaryClick: PropTypes.func.isRequired,
     onSwiping: PropTypes.func.isRequired,
     onSwiped: PropTypes.func.isRequired
-  };
-
-  static defaultProps = {
-    buttonCount: 1
   };
 
   constructor(props) {
@@ -59,23 +54,15 @@ class Navigation extends Component {
   }
 
   renderLeft() {
-    if (this.props.buttonCount >= 2) {
-      return (
-        <NavigationButton key="left" onClick={this.handleSecondaryClick} />
-      );
-    } else {
-      return null;
-    }
+    return (
+      <NavigationButton key="left" onClick={this.handleSecondaryClick} />
+    );
   }
 
   renderCenter() {
-    if (this.props.buttonCount === 3) {
-      return (
-        <NavigationButton key="center" type="center" onClick={this.handleTertiaryClick} />
-      );
-    } else {
-      return null;
-    }
+    return (
+      <NavigationButton key="center" type="center" onClick={this.handleTertiaryClick} />
+    );
   }
 
   renderRight() {

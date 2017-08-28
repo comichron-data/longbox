@@ -138,7 +138,6 @@ class Carousel extends Component {
 
   renderNavigation() {
     const props = {
-      buttonCount: 3,
       onPrimaryClick: this.handlePrimaryClick,
       onSecondaryClick: this.handleSecondaryClick,
       onTertiaryClick: this.handleTertiaryClick,
