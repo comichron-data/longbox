@@ -1,4 +1,4 @@
-export const nextPageButton = 1;
+export const nextPageButton = 0;
 export const previousPageButton = 10;
 export const controlsButton = 20;
 export const fullscreenButton = 30;
