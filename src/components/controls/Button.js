@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 class Button extends Component {
   static propTypes = {
     onClick: PropTypes.func.isRequired,
+    label: PropTypes.string.isRequired,
     animateIn: PropTypes.bool
   }
 
@@ -19,7 +20,7 @@ class Button extends Component {
 
   render() {
     return (
-      <button className={this.className()} onClick={this.handleClick}>
+      <button className={this.className()} onClick={this.handleClick} aria-label={this.props.label}>
         {this.props.children}
       </button>
     );

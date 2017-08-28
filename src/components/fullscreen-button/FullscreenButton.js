@@ -15,10 +15,18 @@ class FullscreenButton extends Component {
     const icon = this.renderIcon();
 
     return (
-      <Button aria-label="fullscreen" onClick={this.handleClick}>
+      <Button label={this.label()} onClick={this.handleClick}>
         {icon}
       </Button>
     );
+  }
+
+  label() {
+    if (this.props.isFullscreen) {
+      return 'Exit fullscreen';
+    } else {
+      return 'Enter fullscreen';
+    }
   }
 
   renderIcon() {

@@ -25,7 +25,7 @@ class ShareButton extends Component {
   render() {
     return (
       <span>
-        <Button onClick={this.handleClick}>
+        <Button onClick={this.handleClick} label={this.label()}>
           <Icon type="share" />
         </Button>
         {this.renderSocialMediaButtons()}
@@ -33,13 +33,21 @@ class ShareButton extends Component {
     );
   }
 
+  label() {
+    if (this.state.open) {
+      return 'Hide share options';
+    } else {
+      return 'Show share options';
+    }
+  }
+
   renderSocialMediaButtons() {
     if (this.state.open) {
       return [
-        <Button key="facebook" onClick={this.handleFacebookClick} animateIn={true}>
+        <Button key="facebook" label="Share on Facebook" onClick={this.handleFacebookClick} animateIn={true}>
           <Icon type="facebook" />
         </Button>,
-        <Button key="twitter" onClick={this.handleTwitterClick} animateIn={true}>
+        <Button key="twitter" label="Share on Twitter" onClick={this.handleTwitterClick} animateIn={true}>
           <Icon type="twitter" />
         </Button>
       ];
