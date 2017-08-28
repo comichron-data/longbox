@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 export default function NavigationButton(props) {
   const className = props.type === 'center'
@@ -14,3 +15,13 @@ export default function NavigationButton(props) {
     />
   );
 }
+
+NavigationButton.propTypes = {
+  type: PropTypes.oneOf(['center', 'side']),
+  onClick: PropTypes.func.isRequired,
+  label: PropTypes.string.isRequired
+};
+
+NavigationButton.defaultProps = {
+  type: 'side'
+};
