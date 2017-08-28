@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import * as tabIndex from '../../tab-index';
 import Icon from '../controls/Icon';
 import Button from '../controls/Button';
 
@@ -16,7 +15,7 @@ class FullscreenButton extends Component {
     const icon = this.renderIcon();
 
     return (
-      <Button label={this.label()} onClick={this.handleClick} tabIndex={tabIndex.fullscreenButton}>
+      <Button label={this.label()} onClick={this.handleClick}>
         {icon}
       </Button>
     );

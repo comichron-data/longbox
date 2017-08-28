@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Swipeable from 'react-swipeable';
-import * as tabIndex from '../../tab-index';
 
 import NavigationButton from './NavigationButton';
 import './Navigation.css';
@@ -56,35 +55,19 @@ class Navigation extends Component {
 
   renderLeft() {
     return (
-      <NavigationButton
-        key="left"
-        onClick={this.handleSecondaryClick}
-        label="Go to previous page"
-        tabIndex={tabIndex.previousPageButton}
-      />
+      <NavigationButton key="left" onClick={this.handleSecondaryClick} label="Go to previous page" />
     );
   }
 
   renderCenter() {
     return (
-      <NavigationButton
-        key="center"
-        type="center"
-        onClick={this.handleTertiaryClick}
-        label="Toggle controls"
-        tabIndex={tabIndex.controlsButton}
-      />
+      <NavigationButton key="center" type="center" onClick={this.handleTertiaryClick} label="Toggle controls" />
     );
   }
 
   renderRight() {
     return (
-      <NavigationButton
-        key="right"
-        onClick={this.handlePrimaryClick}
-        label="Go to next page"
-        tabIndex={tabIndex.nextPageButton}
-      />
+      <NavigationButton key="right" onClick={this.handlePrimaryClick} label="Go to next page" />
     );
   }
 

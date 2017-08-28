@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import * as tabIndex from '../../tab-index';
 import Icon from '../controls/Icon';
 import Button from '../controls/Button';
 
@@ -26,7 +25,7 @@ class ShareButton extends Component {
   render() {
     return (
       <span>
-        <Button onClick={this.handleClick} label={this.label()} tabIndex={tabIndex.shareButton}>
+        <Button onClick={this.handleClick} label={this.label()}>
           <Icon type="share" />
         </Button>
         {this.renderSocialMediaButtons()}
@@ -45,10 +44,10 @@ class ShareButton extends Component {
   renderSocialMediaButtons() {
     if (this.state.open) {
       return [
-        <Button key="facebook" label="Share on Facebook" onClick={this.handleFacebookClick} animateIn={true} tabIndex={tabIndex.facebookButton}>
+        <Button key="facebook" label="Share on Facebook" onClick={this.handleFacebookClick} animateIn={true}>
           <Icon type="facebook" />
         </Button>,
-        <Button key="twitter" label="Share on Twitter" onClick={this.handleTwitterClick} animateIn={true} tabIndex={tabIndex.twitterButton}>
+        <Button key="twitter" label="Share on Twitter" onClick={this.handleTwitterClick} animateIn={true}>
           <Icon type="twitter" />
         </Button>
       ];
