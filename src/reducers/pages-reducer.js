@@ -72,7 +72,7 @@ export default function pagesReducer(state, action) {
       newState.preloadsDone = allPreloadsHaveLoaded(newState);
 
       if (newState.preloadsDone && !state.preloadsDone) {
-        return lazyLoadLogic(state);
+        return lazyLoadLogic(newState);
       } else {
         return newState;
       }
