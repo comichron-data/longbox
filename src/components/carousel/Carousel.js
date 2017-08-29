@@ -53,6 +53,8 @@ class Carousel extends Component {
     this.handleSwiping = this.handleSwiping.bind(this);
     this.handleSwiped = this.handleSwiped.bind(this);
     this.handleResize = this.handleResize.bind(this);
+
+    this.cacheTopLevelElement = this.cacheTopLevelElement.bind(this);
   }
 
   componentDidMount() {
@@ -78,7 +80,7 @@ class Carousel extends Component {
     }
 
     return (
-      <div id="carousel">
+      <div id="carousel" ref={this.cacheTopLevelElement}>
         <div className="lb-c-carousel">
 
           <div className={this.sliderClasses()} style={styles}>
@@ -98,6 +100,10 @@ class Carousel extends Component {
         </div>
       </div>
     );
+  }
+
+  cacheTopLevelElement(element) {
+    this._element = element;
   }
 
   /**
@@ -207,7 +213,9 @@ class Carousel extends Component {
   }
 
   scrollToTop() {
-    ReactDOM.findDOMNode(this).scrollIntoView();
+    if (this._element) {
+      this._element.scrollIntoView();
+    }
   }
 
   renderControls() {
