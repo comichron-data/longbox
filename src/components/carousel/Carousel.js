@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import ReactDOM from 'react-dom';
 
 import './Carousel.css';
 
@@ -86,9 +85,7 @@ class Carousel extends Component {
           <div className={this.sliderClasses()} style={styles}>
             {this.renderPages()}
           </div>
-          <div className="lb-c-carousel__spinner lb-c-carousel__spinner--isVisible">
-            <Spinner/>
-          </div>
+          {this.renderSpinner()}
           <div className="lb-c-carousel__ui">
 
             {this.renderNavigation()}
@@ -98,6 +95,20 @@ class Carousel extends Component {
           </div>
 
         </div>
+      </div>
+    );
+  }
+
+  renderSpinner() {
+    let classes = 'lb-c-carousel__spinner';
+
+    if (!this.getCurrentPageProps().loaded) {
+      classes += ' lb-c-carousel__spinner--isVisible';
+    }
+
+    return (
+      <div className={classes}>
+        <Spinner/>
       </div>
     );
   }
