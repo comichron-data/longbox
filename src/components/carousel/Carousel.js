@@ -157,11 +157,9 @@ class Carousel extends Component {
 
   handleSwiped(deltaX) {
     if (deltaX < -this.props.pageTurnThreshold) {
-      // next page turn
-      this.handlePrimaryClick();
+      this.goToNextPage();
     } else if (deltaX > this.props.pageTurnThreshold) {
-      // prev page turn
-      this.handleSecondaryClick();
+      this.goToPreviousPage();
     }
 
     this.setState({
@@ -178,8 +176,9 @@ class Carousel extends Component {
     const targetIndex = this.props.currentPageIndex + 1;
 
     if (this.isValidPageIndex(targetIndex)) {
-      this.scrollToTop();
-      this.props.onNextPage();
+      this.goToNextPage();
+    } else {
+
     }
   }
 
@@ -187,9 +186,20 @@ class Carousel extends Component {
     const targetIndex = this.props.currentPageIndex - 1;
 
     if (this.isValidPageIndex(targetIndex)) {
-      this.scrollToTop();
-      this.props.onPreviousPage();
+      this.goToPreviousPage();
+    } else {
+
     }
+  }
+
+  goToNextPage() {
+    this.scrollToTop();
+    this.props.onNextPage();
+  }
+
+  goToPreviousPage() {
+    this.scrollToTop();
+    this.props.onPreviousPage();
   }
 
   isValidPageIndex(index) {
