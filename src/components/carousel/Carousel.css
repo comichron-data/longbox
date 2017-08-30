@@ -21,7 +21,6 @@
 }
 
 .lb-c-carousel__spinner {
-  opacity: 0;
   position: fixed;
   height: 100vh;
   width: 100%;
@@ -29,15 +28,32 @@
   left: 0;
   right: 0;
   bottom: 0;
-  transition: opacity .2s;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.lb-c-carousel__spinner--isVisible {
-  opacity: 1
+/* Start of rules for CSSTransitionGroup */
+.spinner-enter {
+  opacity: .01;
+  /* Keep duration the same as enter timeout passed to CSSTransitionGroup */
+  transition: opacity .4s;
 }
+
+.spinner-enter.spinner-enter-active {
+  opacity: 1;
+}
+
+.spinner-leave {
+  opacity: 1;
+  /* Keep duration the same as leave timeout passed to CSSTransitionGroup */
+  transition: opacity .4s;
+}
+
+.spinner-leave.spinner-leave-active {
+  opacity: .01;
+}
+/* End of rules for CSSTransitionGroup */
 
 .lb-c-carousel__ui {
   position: fixed;

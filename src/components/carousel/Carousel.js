@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { CSSTransitionGroup } from 'react-transition-group';
 
 import './Carousel.css';
 
@@ -100,15 +101,18 @@ class Carousel extends Component {
   }
 
   renderSpinner() {
-    let classes = 'lb-c-carousel__spinner';
-
-    if (!this.getCurrentPageProps().loaded) {
-      classes += ' lb-c-carousel__spinner--isVisible';
-    }
+    const spinner =
+      this.getCurrentPageProps().loaded ? null : <Spinner key="spinner" />;
 
     return (
-      <div className={classes}>
-        <Spinner/>
+      <div className="lb-c-carousel__spinner">
+        <CSSTransitionGroup
+          transitionName="spinner"
+          transitionEnterTimeout={400}
+          transitionLeaveTimeout={400}
+        >
+          {spinner}
+        </CSSTransitionGroup>
       </div>
     );
   }
