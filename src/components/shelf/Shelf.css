@@ -61,11 +61,10 @@
     margin-left: auto;
   }
 }
-.lb-c-shelf__content
+
 .lb-c-shelf__tab--close {
   position: absolute;
   padding-left: .8em;
   padding-right: .8em;
   right: .5rem;
-  /*border-bottom: 1px solid #ececec;*/
 }
