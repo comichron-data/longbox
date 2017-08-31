@@ -196,23 +196,11 @@ class Carousel extends Component {
   }
 
   handlePrimaryClick() {
-    const targetIndex = this.props.currentPageIndex + 1;
-
-    if (this.isValidPageIndex(targetIndex)) {
-      this.goToNextPage();
-    } else {
-
-    }
+    this.goToNextPage();
   }
 
   handleSecondaryClick() {
-    const targetIndex = this.props.currentPageIndex - 1;
-
-    if (this.isValidPageIndex(targetIndex)) {
-      this.goToPreviousPage();
-    } else {
-
-    }
+    this.goToPreviousPage();
   }
 
   goToNextPage() {
@@ -223,10 +211,6 @@ class Carousel extends Component {
   goToPreviousPage() {
     this.scrollToTop();
     this.props.onPreviousPage();
-  }
-
-  isValidPageIndex(index) {
-    return index >= 0 && index < this.props.pages.length;
   }
 
   scrollToTop() {
