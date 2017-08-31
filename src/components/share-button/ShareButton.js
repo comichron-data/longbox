@@ -6,8 +6,7 @@ import Button from '../controls/Button';
 
 class ShareButton extends Component {
   static propTypes = {
-    tweet: PropTypes.string.isRequired,
-    shareUrl: PropTypes.string.isRequired
+    onClick: PropTypes.func.isRequired
   };
 
   constructor(props) {
@@ -18,18 +17,13 @@ class ShareButton extends Component {
     };
 
     this.handleClick = this.handleClick.bind(this);
-    this.handleTwitterClick = this.handleTwitterClick.bind(this);
-    this.handleFacebookClick = this.handleFacebookClick.bind(this);
   }
 
   render() {
     return (
-      <span>
-        <Button onClick={this.handleClick} label={this.label()}>
-          <Icon type="share" />
-        </Button>
-        {this.renderSocialMediaButtons()}
-      </span>
+      <Button onClick={this.handleClick} label={this.label()}>
+        <Icon type="share" />
+      </Button>
     );
   }
 
@@ -41,39 +35,12 @@ class ShareButton extends Component {
     }
   }
 
-  renderSocialMediaButtons() {
-    if (this.state.open) {
-      return [
-        <Button key="facebook" label="Share on Facebook" onClick={this.handleFacebookClick} animateIn={true}>
-          <Icon type="facebook" />
-        </Button>,
-        <Button key="twitter" label="Share on Twitter" onClick={this.handleTwitterClick} animateIn={true}>
-          <Icon type="twitter" />
-        </Button>
-      ];
-    } else {
-      return [];
-    }
-  }
-
   handleClick() {
     this.setState({
       open: !this.state.open
     });
-  }
 
-  handleFacebookClick() {
-    const escaped = encodeURIComponent(this.props.shareUrl);
-    const shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${escaped}`;
-
-    window.open(shareUrl);
-  }
-
-  handleTwitterClick() {
-    const tweet = encodeURIComponent(this.props.tweet);
-    const shareUrl = `https://twitter.com/home?status=${tweet}`;
-
-    window.open(shareUrl);
+    this.props.onClick();
   }
 }
 
