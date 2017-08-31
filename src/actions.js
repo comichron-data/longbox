@@ -14,6 +14,7 @@ export const TOGGLE_FULLSCREEN = 'TOGGLE_FULLSCREEN';
 // fscreen telling us that its state has changed
 export const CHANGE_FULLSCREEN = 'CHANGE_FULLSCREEN';
 
+export const TOGGLE_SHELF = 'TOGGLE_SHELF';
 
 /*
 Action creators
@@ -27,6 +28,12 @@ export function bootstrap({pages, tweet, shareUrl}) {
       tweet,
       shareUrl
     }
+  };
+}
+
+export function toggleShelf() {
+  return {
+    type: TOGGLE_SHELF
   };
 }
 

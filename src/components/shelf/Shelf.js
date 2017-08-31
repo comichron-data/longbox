@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
+
+import {toggleShelf} from '../../actions';
 
 import './Shelf.css';
 
@@ -50,4 +53,14 @@ class Shelf extends Component {
   }
 }
 
-export default Shelf;
+function mapStateToProps(state) {
+  return {
+    open: state.shelf.open
+  };
+}
+
+const mapDispatchToProps = {
+  onClose: toggleShelf
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Shelf);
