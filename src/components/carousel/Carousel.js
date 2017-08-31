@@ -204,8 +204,10 @@ class Carousel extends Component {
   }
 
   goToNextPage() {
+    const isOnLastPage = this.props.currentPageIndex === this.props.pages.length - 1;
+
     this.scrollToTop();
-    this.props.onNextPage();
+    this.props.onNextPage(isOnLastPage);
   }
 
   goToPreviousPage() {

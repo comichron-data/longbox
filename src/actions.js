@@ -52,9 +52,12 @@ export function changeFullscreen(isFullscreen) {
   };
 }
 
-export function goToNextPage() {
+export function goToNextPage(fromLastPage = false) {
   return {
-    type: GO_TO_NEXT_PAGE
+    type: GO_TO_NEXT_PAGE,
+    payload: {
+      fromLastPage
+    }
   };
 }
 
