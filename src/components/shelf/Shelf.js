@@ -1,20 +1,31 @@
 import React, { Component } from 'react';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 
 import './Shelf.css';
 
 class Shelf extends Component {
-  // constructor(props) {
-  //   super(props);
-  // }
+  constructor(props) {
+    super(props);
+
+    this.handleCloseClick = this.handleCloseClick.bind(this);
+  }
+
+  static propTypes = {
+    open: PropTypes.bool.isRequired,
+    onClose: PropTypes.func.isRequired
+  }
 
   render() {
+    let className = 'lb-c-shelf';
+    if (this.props.open) {
+      className += ' lb-c-shelf--is-open';
+    }
+
     return (
-      <div className="lb-c-shelf lb-c-shelf--is-open">
+      <div className={className}>
         <div className="lb-c-shelf__control-bar">
-          <button className="lb-c-shelf__tab lb-c-shelf__tab--is-active">Author's Commentary</button>
-          <button className="lb-c-shelf__tab">Comments</button>
-          <button className="lb-c-shelf__tab lb-c-shelf__tab--close">×</button>
+          <button onClick={this.handleCloseClick} className="lb-c-shelf__tab lb-c-shelf__tab--is-active">About</button>
+          <button onClick={this.handleCloseClick} className="lb-c-shelf__tab lb-c-shelf__tab--close">×</button>
         </div>
         <div className="lb-c-shelf__content-wraper">
           <div className="lb-c-shelf__content">
@@ -32,6 +43,10 @@ class Shelf extends Component {
         </div>
       </div>
     );
+  }
+
+  handleCloseClick() {
+    this.props.onClose();
   }
 }
 
