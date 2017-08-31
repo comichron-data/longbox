@@ -9,6 +9,7 @@ import Counter from '../counter/Counter';
 import Controls from '../controls/Controls';
 import Navigation from '../navigation/Navigation';
 import Spinner from '../spinner/Spinner';
+import Shelf from '../shelf/Shelf';
 
 const clientWidth = () => document.documentElement.clientWidth;
 
@@ -96,6 +97,7 @@ class Carousel extends Component {
           </div>
 
         </div>
+        <Shelf />
       </div>
     );
   }
