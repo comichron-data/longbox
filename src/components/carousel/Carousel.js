@@ -259,17 +259,21 @@ class Carousel extends Component {
   renderCounter() {
     const {label} = this.getCurrentPageProps();
 
-    const classes = [
-      'lb-c-carousel__toolbar',
-      'lb-c-carousel__toolbar--counter',
-      this.props.isShowingControls ? 'lb-js-carousel__toolbar--isVisble' : ''
-    ].join(' ');
+    if (!label) {
+      return null;
+    } else {
+      const classes = [
+        'lb-c-carousel__toolbar',
+        'lb-c-carousel__toolbar--counter',
+        this.props.isShowingControls ? 'lb-js-carousel__toolbar--isVisble' : ''
+      ].join(' ');
 
-    return (
-      <div className={classes}>
-        <Counter label={label} />
-      </div>
-    );
+      return (
+        <div className={classes}>
+          <Counter label={label} />
+        </div>
+      );
+    }
   }
 
   getCurrentPageProps() {
