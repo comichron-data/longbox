@@ -7,7 +7,7 @@
   background-color: white;
   box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
   transform: translateY(100%);
-  transition: box-shadow .2s, transform .2s;
+  transition: box-shadow .3s, transform .3s;
   border-top: 1px solid #C3C3C3;
 }
 
