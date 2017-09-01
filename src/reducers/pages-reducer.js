@@ -137,7 +137,7 @@ function getPreloads(state) {
 }
 
 function getPages(state) {
-  const {byId} = state;
-  return Object.keys(byId)
+  const {byId, idsInOrder} = state;
+  return idsInOrder
     .map(id => byId[id]);
 }
