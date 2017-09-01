@@ -6,6 +6,7 @@ class Icon extends Component {
     type: PropTypes.oneOf([
       'enter-fullscreen',
       'exit-fullscreen',
+      'about',
       'share',
       'facebook',
       'twitter'
